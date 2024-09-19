@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import spotifyAPI from "../../../config/spotifyConfig";
+import spotifyAPI from "config/spotifyConfig";
 
 // Define the GET method
 export async function GET(req: NextRequest) {

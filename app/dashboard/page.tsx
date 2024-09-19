@@ -5,9 +5,9 @@ import { Row, Col, Card } from "react-bootstrap";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 // import Hamster from "../ui/hamster/Hamster";
-import NavBar from "../../components/UI/Navbar";
-import Footer from "../../components/Layout/Footer";
-import styles from "../../styles/Dashboard.module.css";
+import NavBar from "components/UI/Navbar";
+import Footer from "components/Layout/Footer";
+import styles from "styles/Dashboard.module.css";
 // import music from "/music.svg";
 // import heart from "/heart.svg";
 // import goals from "/goals.png"

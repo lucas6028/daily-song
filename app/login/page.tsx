@@ -3,8 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { useRouter } from 'next/navigation';
-import redirectURL from '../../lib/redirectURL';
-import requestAccess from '../../lib/requestAccess';
+import redirectURL from 'lib/redirectURL';
+import requestAccess from 'lib/requestAccess';
 // import spotifyLogo from '../../assets/Spotify_logo_with_text.svg';
 
 const Login: React.FC = () => {

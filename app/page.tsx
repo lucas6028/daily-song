@@ -3,9 +3,9 @@
 import { useRouter } from 'next/navigation';
 import { Zoom, Slide } from 'react-awesome-reveal';
 import Image from 'next/image';
-import styles from '../styles/Home.module.css';
+import styles from 'styles/Home.module.css';
 // import brand from "medium_icon.png";
-import HomeButton from '../components/UI/HomeButton';
+import HomeButton from 'components/UI/HomeButton';
 
 const Home: React.FC = () => {
     const router = useRouter();
