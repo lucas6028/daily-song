@@ -13,7 +13,6 @@ const Login: React.FC = () => {
     const router = useRouter();
 
     useEffect(() => {
-        console.log(process.env.NEXT_PUBLIC_CLIENT_ID);
         const existingCode = new URLSearchParams(window.location.search).get("code");
         if (existingCode) {
             setUrlCode(existingCode);
@@ -40,7 +39,8 @@ const Login: React.FC = () => {
                         <Image
                             src='/images/spotify_icon.svg'
                             alt="Spotify Logo"
-                            style={{ width: '150px' }}
+                            width={150}
+                            height={150}
                         />
                     </Card.Title>
                     <Button
