@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import spotifyAPI from "../../../config/spotifyConfig";
+import spotifyAPI from "config/spotifyConfig";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const code = searchParams.get("code") || "";
 
-  if (!code) {
+  if (code === "") {
     console.error("Authorization code is missing from request");
     return NextResponse.json(
       { error: "Authorization code is required" },
@@ -47,7 +47,7 @@ export async function GET(req: NextRequest) {
 
     return response;
   } catch (err) {
-    console.log("Redirect URI:", process.env.API_REDIRECT_URI);
+    console.log("Redirect URI:", process.env.NEXT_PUBLIC_REDIRECT_URL);
     console.error("Error during authorization code grant", err);
     return NextResponse.json(
       { error: "Failed to retrieve tokens" },

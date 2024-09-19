@@ -40,7 +40,7 @@ const Login: React.FC = () => {
                             src='/images/spotify_icon.svg'
                             alt="Spotify Logo"
                             width={150}
-                            height={150}
+                            height={80}
                         />
                     </Card.Title>
                     <Button
