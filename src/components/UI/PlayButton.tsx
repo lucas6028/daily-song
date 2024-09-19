@@ -1,6 +1,6 @@
 import styles from './PlayButton.module.css';
 import Image from 'next/image';
-import playPhoto from '/play-button1.png';
+import playPhoto from '/images/play-button1.png';
 
 interface PlayButtonProps {
     onClick?: () => void;
