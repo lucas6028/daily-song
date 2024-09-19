@@ -1,0 +1,24 @@
+.button {
+  background-color: transparent;
+  border: 2px solid #1c5bb9; /* Green Spotify color for border */
+  /* border: 2px solid #1cb954; */
+  border-radius: 50%; /* Makes the button circular */
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px; /* Fixed width */
+  height: 40px; /* Fixed height */
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.button:hover {
+  transform: scale(1.1); /* Scale up the button on hover */
+  /* box-shadow: 0 0 10px rgba(28, 185, 84, 0.7);  */
+  box-shadow: 0 0 10px rgba(28, 101, 185, 0.7); /* Add glow effect */
+}
+
+.button img {
+  width: 37px; /* Size of the play icon */
+  height: 37px;
+}
