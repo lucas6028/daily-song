@@ -3,7 +3,7 @@ import spotifyAPI from "config/spotifyConfig";
 
 // Define the GET method
 export async function GET(req: NextRequest) {
-  const cookieStore = req.cookies; // In Next.js, 'NextRequest' doesn't use 'cookies()'
+  const cookieStore = req.cookies;
   const accessToken = cookieStore.get("access_token")?.value;
   const refreshToken = cookieStore.get("refresh_token")?.value;
 

@@ -4,7 +4,6 @@ import spotifyAPI from "../../../config/spotifyConfig";
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const code = searchParams.get("code") || "";
-  const cookieStore = req.cookies;
 
   if (!code) {
     console.error("Authorization code is missing from request");
