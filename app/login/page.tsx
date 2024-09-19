@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import redirectURL from 'lib/redirectURL';
 import requestAccess from 'lib/requestAccess';
 // import spotifyLogo from '../../assets/Spotify_logo_with_text.svg';
@@ -28,6 +29,7 @@ const Login: React.FC = () => {
                 })
                 .catch((err) => console.error(err));
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [urlCode]);
 
     return (
@@ -35,7 +37,7 @@ const Login: React.FC = () => {
             <Card style={{ width: '22rem', textAlign: 'center' }} className="p-4 bg-dark text-white shadow-lg rounded">
                 <Card.Body>
                     <Card.Title className="mb-4">
-                        <img
+                        <Image
                             src='/images/spotify_icon.svg'
                             alt="Spotify Logo"
                             style={{ width: '150px' }}
@@ -58,7 +60,7 @@ const Login: React.FC = () => {
                         Sign in with Spotify
                     </Button>
                     <Card.Text className="mt-3">
-                        Don't have an account? <a href="/signup" className="text-white">Create one</a>
+                        Do not have an account? <a href="/signup" className="text-white">Create one</a>
                     </Card.Text>
                 </Card.Body>
             </Card>

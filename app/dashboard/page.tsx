@@ -8,10 +8,12 @@ import axios from "axios";
 import NavBar from "components/UI/Navbar";
 import Footer from "components/Layout/Footer";
 import styles from "styles/Dashboard.module.css";
+import Image from "next/image";
 
 export default function Dashboard() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const router = useRouter();
+    const heartRoute = "/images/heart.svg";
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -33,6 +35,7 @@ export default function Dashboard() {
         };
 
         checkAuth();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if (!isAuthenticated) {
@@ -52,7 +55,7 @@ export default function Dashboard() {
                     <Col md={3} className="mb-5 d-flex justify-content-center">
                         <Card className={styles.card} onClick={() => router.push("/topTracks")}>
                             <div className={styles.iconContainer}>
-                                <img src="/images/heart.svg" className={styles.icon} />
+                                <Image src={heartRoute} alt="heart" className={styles.icon} />
                             </div>
                             <Card.Body>
                                 <Card.Title>Top Tracks</Card.Title>
@@ -65,7 +68,7 @@ export default function Dashboard() {
                     <Col md={3} className="mb-5 d-flex justify-content-center">
                         <Card className={styles.card} onClick={() => router.push("/daily")}>
                             <div className={styles.iconContainer}>
-                                <img src="/images/heart.svg" className={styles.icon} />
+                                <Image src={heartRoute} alt="heart" className={styles.icon} />
                             </div>
                             <Card.Body>
                                 <Card.Title>Recommend Tracks</Card.Title>
@@ -78,7 +81,7 @@ export default function Dashboard() {
                     <Col md={3} className="mb-5 d-flex justify-content-center">
                         <Card className={styles.card} onClick={() => router.push("/challenge")}>
                             <div className={styles.iconContainer}>
-                                <img src="/images/heart.svg" className={styles.icon} />
+                                <Image src={heartRoute} alt="heart" className={styles.icon} />
                             </div>
                             <Card.Body>
                                 <Card.Title>Challenge</Card.Title>
