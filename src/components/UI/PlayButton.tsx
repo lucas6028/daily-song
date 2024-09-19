@@ -1,4 +1,5 @@
 import styles from './PlayButton.module.css';
+import Image from 'next/image';
 import playPhoto from '/play-button1.png';
 
 interface PlayButtonProps {
@@ -8,7 +9,7 @@ interface PlayButtonProps {
 function PlayButton({ onClick }: PlayButtonProps) {
     return (
         <button className={styles.button} onClick={onClick}>
-            <img src={playPhoto} alt="Play Button" />
+            <Image src={playPhoto} alt="Play Button" />
         </button>
     );
 }
