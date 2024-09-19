@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default async function RequestAccess(urlCode: string) {
+export default async function requestAccess(urlCode: string) {
   if (!urlCode) {
     console.error("Authorization code is missing from URL");
     return;

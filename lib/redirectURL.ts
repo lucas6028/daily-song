@@ -1,6 +1,6 @@
 import { generateRandomString } from "./generateRandomString";
 
-export default function RedirectURL() {
+export default function redirectURL() {
   const clientId = process.env.SECRET_CLIENT_ID || "";
   const redirectURI = process.env.SECRET_CLIENT_SECRET || "";
   const state = generateRandomString(128);
