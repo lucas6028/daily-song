@@ -37,7 +37,7 @@ const Login: React.FC = () => {
                 <Card.Body>
                     <Card.Title className="mb-4">
                         <img
-                            src='/images/spotify_logo.svg'
+                            src='/images/spotify_icon.svg'
                             alt="Spotify Logo"
                             style={{ width: '150px' }}
                         />

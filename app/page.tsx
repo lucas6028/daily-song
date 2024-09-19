@@ -6,6 +6,7 @@ import Image from 'next/image';
 import styles from 'styles/Home.module.css';
 // import brand from "medium_icon.png";
 import HomeButton from 'components/UI/HomeButton';
+import Footer from 'components/Layout/Footer';
 
 const Home: React.FC = () => {
     const router = useRouter();
@@ -31,6 +32,7 @@ const Home: React.FC = () => {
                     Display top tracks, recommend tracks, and daily challenge
                 </p>
             </Zoom>
+            <Footer />
         </div>
     );
 };
