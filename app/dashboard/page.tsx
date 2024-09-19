@@ -5,7 +5,7 @@ import { Row, Col, Card } from "react-bootstrap";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 // import Hamster from "../ui/hamster/Hamster";
-import NavBar from "components/UI/Navbar";
+import NavBar from "components/Layout/Navbar";
 import Footer from "components/Layout/Footer";
 import styles from "styles/Dashboard.module.css";
 import Image from "next/image";
