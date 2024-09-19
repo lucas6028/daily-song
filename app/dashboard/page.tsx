@@ -33,7 +33,6 @@ export default function Dashboard() {
         };
 
         checkAuth();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if (!isAuthenticated) {
