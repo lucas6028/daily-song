@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { handleLogout } from '../../lib/logout';
 import NextImage from 'next/image';
 import axios from 'axios';
-import logo from "/small_icon.png"
+import logo from "/images/small_icon.png"
 // import logo from "/medium_icon.png";
 
 function NavBar() {
