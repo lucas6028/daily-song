@@ -1,8 +1,8 @@
 import { generateRandomString } from "./generateRandomString";
 
 export default function redirectURL() {
-  const clientId = process.env.SECRET_CLIENT_ID || "";
-  const redirectURI = process.env.SECRET_CLIENT_SECRET || "";
+  const clientId = process.env.NEXT_PUBLIC_CLIENT_ID || "";
+  const redirectURI = process.env.NEXT_PUBLIC_REDIRECT_URL || "";
   const state = generateRandomString(128);
 
   const params = new URLSearchParams();

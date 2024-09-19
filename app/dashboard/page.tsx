@@ -1,13 +1,15 @@
+'use client';
+
 import { useState, useEffect } from "react";
 import { Row, Col, Card } from "react-bootstrap";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 // import Hamster from "../ui/hamster/Hamster";
-import NavBar from "../components/UI/Navbar";
-import Footer from "../components/Layout/Footer";
-import styles from "../styles/Dashboard.module.css";
+import NavBar from "../../components/UI/Navbar";
+import Footer from "../../components/Layout/Footer";
+import styles from "../../styles/Dashboard.module.css";
 // import music from "/music.svg";
-import heart from "/heart.svg";
+// import heart from "/heart.svg";
 // import goals from "/goals.png"
 
 export default function Dashboard() {
@@ -54,7 +56,7 @@ export default function Dashboard() {
                     <Col md={3} className="mb-5 d-flex justify-content-center">
                         <Card className={styles.card} onClick={() => router.push("/topTracks")}>
                             <div className={styles.iconContainer}>
-                                <img src={heart} className={styles.icon} />
+                                <img src={'/images/heart.svg'} className={styles.icon} />
                             </div>
                             <Card.Body>
                                 <Card.Title>Top Tracks</Card.Title>
@@ -67,7 +69,7 @@ export default function Dashboard() {
                     <Col md={3} className="mb-5 d-flex justify-content-center">
                         <Card className={styles.card} onClick={() => router.push("/daily")}>
                             <div className={styles.iconContainer}>
-                                <img src={heart} className={styles.icon} />
+                                <img src={'/images/heart.svg'} className={styles.icon} />
                             </div>
                             <Card.Body>
                                 <Card.Title>Recommend Tracks</Card.Title>
@@ -80,7 +82,7 @@ export default function Dashboard() {
                     <Col md={3} className="mb-5 d-flex justify-content-center">
                         <Card className={styles.card} onClick={() => router.push("/challenge")}>
                             <div className={styles.iconContainer}>
-                                <img src={heart} className={styles.icon} />
+                                <img src={'/images/heart.svg'} className={styles.icon} />
                             </div>
                             <Card.Body>
                                 <Card.Title>Challenge</Card.Title>

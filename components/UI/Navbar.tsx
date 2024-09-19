@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { handleLogout } from '../../lib/logout';
 import NextImage from 'next/image';
 import axios from 'axios';
-import logo from "/images/small_icon.png"
+// import logo from "/images/small_icon.png"
 // import logo from "/medium_icon.png";
 
 function NavBar() {
@@ -28,7 +28,7 @@ function NavBar() {
             <Container>
                 <Navbar.Brand href="/">
                     <NextImage
-                        src={logo}
+                        src='/images/small_icon.png'
                         width="40"
                         height="40"
                         className="d-inline-block align-top"

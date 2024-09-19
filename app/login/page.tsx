@@ -3,15 +3,16 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { useRouter } from 'next/navigation';
-import redirectURL from '../lib/redirectURL';
-import requestAccess from '../lib/requestAccess';
-import spotifyLogo from '../../assets/Spotify_logo_with_text.svg';
+import redirectURL from '../../lib/redirectURL';
+import requestAccess from '../../lib/requestAccess';
+// import spotifyLogo from '../../assets/Spotify_logo_with_text.svg';
 
 const Login: React.FC = () => {
     const [urlCode, setUrlCode] = useState<string | null>(null);
     const router = useRouter();
 
     useEffect(() => {
+        console.log(process.env.NEXT_PUBLIC_CLIENT_ID);
         const existingCode = new URLSearchParams(window.location.search).get("code");
         if (existingCode) {
             setUrlCode(existingCode);
@@ -36,7 +37,7 @@ const Login: React.FC = () => {
                 <Card.Body>
                     <Card.Title className="mb-4">
                         <img
-                            src={spotifyLogo}
+                            src='/images/spotify_logo.svg'
                             alt="Spotify Logo"
                             style={{ width: '150px' }}
                         />

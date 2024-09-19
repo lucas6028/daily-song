@@ -1,0 +1,46 @@
+/* Set a fixed height for the container to center vertically */
+.containerHeight {
+  height: 75vh; /* Makes the container 100% of the viewport height */
+}
+
+/* Styling for the card */
+.card {
+  text-align: center;
+  border: 1px solid #ddd;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  width: 100%; /* Makes the card take up the full column width */
+}
+
+/* Hover effect: scaling and adding a shadow */
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling the icon container */
+.iconContainer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+/* Style the icons */
+.icon {
+  font-size: 4rem;
+  color: #007bff;
+  transition: color 0.3s ease;
+}
+
+/* Change icon color on hover */
+.card:hover .icon {
+  color: #ff6347;
+}
+
+/* Active (clicked) state */
+.card:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
