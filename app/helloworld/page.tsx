@@ -1,7 +1,9 @@
+'use client';
+
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 
-function Test() {
+function Helloworld() {
     const [message, setMessage] = useState("Hello World");
 
     useEffect(() => {
@@ -21,4 +23,4 @@ function Test() {
     )
 }
 
-export default Test
+export default Helloworld;
