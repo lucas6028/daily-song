@@ -55,7 +55,7 @@ export default function Dashboard() {
                     <Col md={3} className="mb-5 d-flex justify-content-center">
                         <Card className={styles.card} onClick={() => router.push("/topTracks")}>
                             <div className={styles.iconContainer}>
-                                <Image src={heartRoute} alt="heart" className={styles.icon} />
+                                <Image src={heartRoute} alt="heart" width={32} height={32} className={styles.icon} />
                             </div>
                             <Card.Body>
                                 <Card.Title>Top Tracks</Card.Title>
@@ -68,7 +68,7 @@ export default function Dashboard() {
                     <Col md={3} className="mb-5 d-flex justify-content-center">
                         <Card className={styles.card} onClick={() => router.push("/daily")}>
                             <div className={styles.iconContainer}>
-                                <Image src={heartRoute} alt="heart" className={styles.icon} />
+                                <Image src={heartRoute} alt="heart" width={32} height={32} className={styles.icon} />
                             </div>
                             <Card.Body>
                                 <Card.Title>Recommend Tracks</Card.Title>
@@ -81,7 +81,7 @@ export default function Dashboard() {
                     <Col md={3} className="mb-5 d-flex justify-content-center">
                         <Card className={styles.card} onClick={() => router.push("/challenge")}>
                             <div className={styles.iconContainer}>
-                                <Image src={heartRoute} alt="heart" className={styles.icon} />
+                                <Image src={heartRoute} alt="heart" width={32} height={32} className={styles.icon} />
                             </div>
                             <Card.Body>
                                 <Card.Title>Challenge</Card.Title>
