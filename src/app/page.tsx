@@ -17,7 +17,8 @@ const Home: React.FC = () => {
           src='/images/medium_icon.png'
           // src={brand}
           alt="Daily Song"
-          fill={true}
+          width={237}
+          height={203}
           className={styles.image}
         />
       </Zoom>
