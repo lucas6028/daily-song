@@ -18,7 +18,7 @@ export default function Dashboard() {
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                const response = await axios.get('/api/checkAuth', { withCredentials: true });
+                const response = await axios.get('/api/auth', { withCredentials: true });
 
                 if (response.data.authenticated) {
                     // User is authenticated (either access token is valid or refreshed)
@@ -53,7 +53,7 @@ export default function Dashboard() {
             <div className={`container mt-4 ${styles.containerHeight}`}>
                 <Row className="d-flex justify-content-center align-items-center h-100">
                     <Col md={3} className="mb-5 d-flex justify-content-center">
-                        <Card className={styles.card} onClick={() => router.push("/topTracks")}>
+                        <Card className={styles.card} onClick={() => router.push("/top-tracks")}>
                             <div className={styles.iconContainer}>
                                 <Image src={heartRoute} alt="heart" width={32} height={32} className={styles.icon} />
                             </div>
