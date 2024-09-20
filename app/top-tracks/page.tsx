@@ -113,7 +113,7 @@ function TopTrack() {
                             <Row className="justify-content-center">
                                 <Col xs={10} sm={8} md={6} lg={4}>
                                     <Card className="bg-secondary bg-gradient text-dark">
-                                        <Card.Img variant="top" src={track.img} />
+                                        <Card.Img variant="top" src={track.img} width={300} height={300} />
                                         <Card.Body className="d-flex flex-column align-items-center">
                                             <Card.Title>{track.title}</Card.Title>
                                             <Card.Text>{track.artist}</Card.Text>
