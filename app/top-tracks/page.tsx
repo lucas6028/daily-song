@@ -1,3 +1,5 @@
+'use client'
+
 import { Carousel, Container, Card, Row, Col } from 'react-bootstrap';
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
