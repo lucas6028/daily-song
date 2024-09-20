@@ -1,11 +1,10 @@
-import { NextApiRequest } from "next";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import spotifyAPI from "config/spotifyConfig";
 
 // refresh access token
-export async function POST(req: NextApiRequest) {
+export async function POST(req: NextRequest) {
   try {
-    const refreshToken = req.cookies["refresh_token"];
+    const refreshToken = req.cookies.get("refresh_token")?.value;
 
     if (!refreshToken) {
       return NextResponse.json({
