@@ -2,7 +2,7 @@ import axios from "axios";
 
 async function refreshToken() {
   try {
-    const res = await axios.get("/api/refresh", {
+    const res = await axios.get("/api/auth/refresh", {
       withCredentials: true,
     });
     console.log(res.data);

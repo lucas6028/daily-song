@@ -7,12 +7,15 @@ export default async function requestAccess(urlCode: string) {
   }
 
   await axios
-    .get("/api/login", {
-      params: {
+    .post(
+      "/api/auth",
+      {
         code: urlCode,
       },
-      withCredentials: true,
-    })
+      {
+        withCredentials: true,
+      }
+    )
     .then((res) => {
       console.log(res.data);
 

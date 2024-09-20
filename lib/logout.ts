@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const handleLogout = async () => {
   try {
-    const res = await axios.get("/api/logout", {
+    const res = await axios.delete("/api/auth", {
       withCredentials: true,
     });
     console.log(res.data);
