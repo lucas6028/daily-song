@@ -33,7 +33,7 @@ export async function GET(req: NextRequest) {
       httpOnly: true,
       secure: process.env.NEXT_PUBLIC_NODE_ENV === "production",
       sameSite: "strict",
-      maxAge: expiresIn * 1000,
+      maxAge: expiresIn,
       path: "/",
     });
 
@@ -41,7 +41,7 @@ export async function GET(req: NextRequest) {
       httpOnly: true,
       secure: process.env.NEXT_PUBLIC_NODE_ENV === "production",
       sameSite: "strict",
-      maxAge: expiresIn * 1000 * 30, // 30 times expiration for refresh token
+      maxAge: expiresIn * 480,
       path: "/",
     });
 
