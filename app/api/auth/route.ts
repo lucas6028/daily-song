@@ -36,7 +36,7 @@ export async function GET(req: NextRequest) {
         httpOnly: true,
         secure: process.env.NEXT_PUBLIC_NODE_ENV === "production",
         sameSite: "strict",
-        maxAge: expiresIn * 1000,
+        maxAge: expiresIn,
         path: "/",
       });
 
