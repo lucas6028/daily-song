@@ -1,0 +1,6 @@
+.playerContainer {
+  max-width: 1000px;
+  margin: 0 auto; /* Center the container horizontally */
+  padding: 20px; /* Optional padding for spacing */
+  text-align: center;
+}
