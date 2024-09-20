@@ -7,8 +7,8 @@ export function GET(req: NextRequest) {
   }
 
   if (access_token) {
-    NextResponse.json({ access_token: access_token });
+    return NextResponse.json({ access_token: access_token });
   } else {
-    NextResponse.json({ error: "Token not available", status: 401 });
+    return NextResponse.json({ error: "Token not available", status: 401 });
   }
 }
