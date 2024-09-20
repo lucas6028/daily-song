@@ -58,7 +58,7 @@ function TopTrack() {
         const fetchToken = async () => {
             try {
                 const res = await axios.get('/api/auth/token', { withCredentials: true });
-                setAccessToken(res.data);
+                setAccessToken(res.data.access_token);
             } catch (err) {
                 console.error("Error while get token: " + err);
             }
