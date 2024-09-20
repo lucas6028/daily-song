@@ -26,7 +26,7 @@ function TopTrack() {
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                const response = await axios.get('/api/checkAuth', { withCredentials: true });
+                const response = await axios.get('/api/auth', { withCredentials: true });
 
                 if (response.data.authenticated) {
                     // User is authenticated (either access token is valid or refreshed)
