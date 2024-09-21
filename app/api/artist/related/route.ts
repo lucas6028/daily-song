@@ -7,7 +7,6 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
 
     const id = searchParams.get("id") || "6HvZYsbFfjnjFrWF950C9d";
-    const market = searchParams.get("market") || "ES";
 
     if (!accessToken) {
       return NextResponse.json({
@@ -17,7 +16,7 @@ export async function GET(request: NextRequest) {
     }
 
     spotifyAPI.setAccessToken(accessToken);
-    const data = await spotifyAPI.getArtistTopTracks(id, market);
+    const data = await spotifyAPI.getArtistRelatedArtists(id);
 
     return NextResponse.json(data);
   } catch (err) {
