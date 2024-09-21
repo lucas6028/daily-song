@@ -40,7 +40,7 @@ function NavBar() {
                     <Nav className="me-auto">
                         <Nav.Link href="/dashboard">Dashboard</Nav.Link>
                         <Nav.Link href="/top-tracks">Top Tracks</Nav.Link>
-                        <Nav.Link href="/daily">Daily</Nav.Link>
+                        <Nav.Link href="/recommend">Recommend</Nav.Link>
                         <Nav.Link href="/challenge">Challenge</Nav.Link>
                         <NavDropdown title="Reference" id="collapsible-nav-dropdown">
                             <NavDropdown.Item href={githubUrl}>Github</NavDropdown.Item>

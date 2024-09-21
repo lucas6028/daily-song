@@ -66,7 +66,7 @@ export default function Dashboard() {
                     </Col>
 
                     <Col md={3} className="mb-5 d-flex justify-content-center">
-                        <Card className={styles.card} onClick={() => router.push("/daily")}>
+                        <Card className={styles.card} onClick={() => router.push("/recommend")}>
                             <div className={styles.iconContainer}>
                                 <Image src={heartRoute} alt="heart" width={32} height={32} className={styles.icon} />
                             </div>
