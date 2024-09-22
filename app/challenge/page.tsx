@@ -241,7 +241,7 @@ function Challenge() {
                     {/* Back Side */}
                     <div className={`d-flex justify-content-center mt-4 ${styles.cardBack}`}>
                         <Card className="shadow-lg bg-secondary bg-gradient text-light rounded-3 profile-card" style={{ width: '20rem' }}>
-                            <Card.Img src={tracks[0].img} alt="Your description" width={300} height={300} className={`rounded-circle mx-auto mt-3 profile-img ${styles.cardImg}`} />
+                            <Card.Img src={tracks[0].img} alt="Your description" width={300} height={300} className={`rounded-circle mx-auto mt-3 profile-img ${styles.cardImg}`} style={{objectFit: "contain"}}/>
                             <Card.Body className="text-center">
                                 <Card.Title>{tracks[0].title}</Card.Title>
                                 <Card.Subtitle>{tracks[0].artist}</Card.Subtitle>

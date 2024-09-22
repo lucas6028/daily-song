@@ -66,6 +66,7 @@
 
 .cargImg {
   border: 4px solid white;
+  border-radius: 100%;
 }
 
 /* h3 {
