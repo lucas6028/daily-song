@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x] # You can set your desired Node.js version
+        node-version: [20] # You can set your desired Node.js version
 
     steps:
       - name: Checkout code
