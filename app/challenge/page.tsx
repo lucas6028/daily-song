@@ -7,7 +7,7 @@ import axios from 'axios';
 // import Loading from "../ui/loading/Loading";
 import SpotifyWebPlayer from "react-spotify-web-playback";
 import spotifyPlayerStyles from "styles/spotifyPlayerStyle";
-import PlayButton from "components/UI/PlayButton";
+// import PlayButton from "components/UI/PlayButton";
 import styles from "styles/Challenge.module.css";
 import { Artist, SpotifyArtistResponse, SpotifyTracksResponse, Track } from "types/types";
 import NavBar from "components/Layout/Navbar";
