@@ -206,7 +206,7 @@ function Challenge() {
                 <div className={`d-flex justify-content-center mt-4 ${styles.cardInner}`}>
                     {/* Front Side */}
                     <div className={`d-flex justify-content-center mt-4 ${styles.Front}`}>
-                        <Card className="shadow-lg bg-dark text-light rounded-3 profile-card" style={{ width: '22rem' }}>
+                        <Card className={`shadow-lg text-light rounded-3 profile-card ${styles.card}`}>
                             <Card.Body className="p-4">
                                 <Form onSubmit={handleSubmit}>
                                     <h5 className="text-center mb-4">Music Selection</h5>
@@ -236,11 +236,11 @@ function Challenge() {
 
                                     {/* Button Group */}
                                     <div className="d-flex justify-content-between mt-4">
-                                        <Button variant="primary" type="submit" className="w-100 me-2">Submit</Button>
-                                        <Button variant="primary" className="w-100 me-2" onClick={() => setUri(tracks[0].trackUri)}>
+                                        <Button variant="info" className={`w-100 me-2 ${styles.frontButtonColor}`} type="submit">Submit</Button>
+                                        <Button variant="info" className={`w-100 me-2 ${styles.frontButtonColor}`} onClick={() => setUri(tracks[0].trackUri)}>
                                             Play
                                         </Button>
-                                        <Button variant="primary" className="w-100" onClick={() => setIsFlipped(!isFlipped)}>Answer</Button>
+                                        <Button variant="info" className={`w-100 me-2 ${styles.frontButtonColor}`} onClick={() => setIsFlipped(!isFlipped)}>Answer</Button>
                                     </div>
                                 </Form>
                             </Card.Body>
@@ -249,7 +249,7 @@ function Challenge() {
 
                     {/* Back Side */}
                     <div className={`d-flex justify-content-center mt-4 ${styles.cardBack}`}>
-                        <Card className="shadow-lg bg-dark text-light rounded-3 profile-card" style={{ width: '22rem' }}>
+                        <Card className={`shadow-lg text-light rounded-3 profile-card ${styles.card}`}>
                             <Card.Img
                                 src={tracks[0].img}
                                 alt="Track cover"
@@ -259,7 +259,7 @@ function Challenge() {
                             <Card.Body className="text-center p-4">
                                 <Card.Title>{tracks[0].title}</Card.Title>
                                 <Card.Subtitle className="mb-3">{tracks[0].artist}</Card.Subtitle>
-                                <Button variant="info" className="w-100" onClick={() => setIsVisible(!isVisible)}>Show Player</Button>
+                                <Button variant="info" className={`w-100 ${styles.frontButtonColor}`} onClick={() => setIsVisible(!isVisible)}>Show Player</Button>
                             </Card.Body>
                         </Card>
                     </div>
