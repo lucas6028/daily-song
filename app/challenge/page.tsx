@@ -206,22 +206,27 @@ function Challenge() {
                 <div className={`d-flex justify-content-center mt-4 ${styles.cardInner}`}>
                     {/* Front Side */}
                     <div className={`d-flex justify-content-center mt-4 ${styles.Front}`}>
-                        <Card className="shadow-lg bg-secondary bg-gradient text-light rounded-3 profile-card" style={{ width: '20rem' }}>
-                            <Card.Body>
+                        <Card className="shadow-lg bg-dark text-light rounded-3 profile-card" style={{ width: '22rem' }}>
+                            <Card.Body className="p-4">
                                 <Form onSubmit={handleSubmit}>
+                                    <h5 className="text-center mb-4">Music Selection</h5>
+
+                                    {/* Song Input */}
                                     <Form.Group className="mb-3" controlId="formBasicPassword">
                                         <Form.Label>Song</Form.Label>
                                         <Form.Control
-                                            placeholder="Name of the song..."
+                                            placeholder="Enter song name..."
                                             onChange={handleTrackChange}
                                             value={selectedTrack}
+                                            className="border-dark"
                                         />
                                     </Form.Group>
 
+                                    {/* Singer Select */}
                                     <Form.Group className="mb-3" controlId="formSelect">
                                         <Form.Label>Singer</Form.Label>
-                                        <Form.Select value={selectedArtists} onChange={handleSingerChange}>
-                                            <option value="" disabled hidden>Select an option...</option>
+                                        <Form.Select value={selectedArtists} onChange={handleSingerChange} className="border-dark">
+                                            <option value="" disabled hidden>Select an artist...</option>
                                             <option value={tracks[0].artist}>{tracks[0].artist}</option>
                                             <option value={relatedArtists[0].name}>{relatedArtists[0].name}</option>
                                             <option value={relatedArtists[1].name}>{relatedArtists[1].name}</option>
@@ -229,9 +234,13 @@ function Challenge() {
                                         </Form.Select>
                                     </Form.Group>
 
-                                    <div className={styles.submitButtonContainer}>
-                                        <Button variant="primary" type="submit">Submit</Button>
-                                        <PlayButton onClick={() => { setUri(tracks[0].trackUri) }} />
+                                    {/* Button Group */}
+                                    <div className="d-flex justify-content-between mt-4">
+                                        <Button variant="primary" type="submit" className="w-100 me-2">Submit</Button>
+                                        <Button variant="primary" className="w-100 me-2" onClick={() => setUri(tracks[0].trackUri)}>
+                                            Play
+                                        </Button>
+                                        <Button variant="primary" className="w-100" onClick={() => setIsFlipped(!isFlipped)}>Answer</Button>
                                     </div>
                                 </Form>
                             </Card.Body>
@@ -240,37 +249,42 @@ function Challenge() {
 
                     {/* Back Side */}
                     <div className={`d-flex justify-content-center mt-4 ${styles.cardBack}`}>
-                        <Card className="shadow-lg bg-secondary bg-gradient text-light rounded-3 profile-card" style={{ width: '20rem' }}>
-                            <Card.Img src={tracks[0].img} alt="Your description" width={300} height={300} className={`rounded-circle mx-auto mt-3 profile-img ${styles.cardImg}`} style={{objectFit: "contain"}}/>
-                            <Card.Body className="text-center">
+                        <Card className="shadow-lg bg-dark text-light rounded-3 profile-card" style={{ width: '22rem' }}>
+                            <Card.Img
+                                src={tracks[0].img}
+                                alt="Track cover"
+                                className="rounded-circle mx-auto mt-3 profile-img"
+                                style={{ width: '150px', height: '150px', objectFit: 'cover' }}
+                            />
+                            <Card.Body className="text-center p-4">
                                 <Card.Title>{tracks[0].title}</Card.Title>
-                                <Card.Subtitle>{tracks[0].artist}</Card.Subtitle>
+                                <Card.Subtitle className="mb-3">{tracks[0].artist}</Card.Subtitle>
+                                <Button variant="info" className="w-100" onClick={() => setIsVisible(!isVisible)}>Show Player</Button>
                             </Card.Body>
                         </Card>
                     </div>
                 </div>
+
             </div>
-            <Button variant="success" className="mt-3" onClick={() => setIsFlipped(!isFlipped)}>
-                Flip to Image
-            </Button>
-            <Button className="primary" onClick={() => setIsVisible(!isVisible)}>Show</Button>
-            <div className={`${isVisible ? styles.visible : styles.hidden} ${styles.playerContainer}`}>
-                {access_token ?
-                    <SpotifyWebPlayer callback={(state) => {
-                        if (!state.isPlaying) {
-                            setPlay(false);
-                        }
-                    }}
+            {/* Spotify Player */}
+            <div className={`${isVisible ? styles.visible : styles.hidden} ${styles.playerContainer} mt-3`}>
+                {access_token ? (
+                    <SpotifyWebPlayer
+                        callback={(state) => {
+                            if (!state.isPlaying) setPlay(false);
+                        }}
                         showSaveIcon
                         play={play}
                         token={access_token}
                         uris={[uri]}
                         initialVolume={50}
-                        styles={spotifyPlayerStyles} />
-                    :
+                        styles={spotifyPlayerStyles}
+                    />
+                ) : (
                     <p>No token</p>
-                }
-            </ div>
+                )}
+            </div>
+
             <Footer />
         </>
     )
