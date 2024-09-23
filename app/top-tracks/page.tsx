@@ -112,11 +112,11 @@ function TopTrack() {
                         <Carousel.Item key={track.id}>
                             <Row className="justify-content-center">
                                 <Col xs={10} sm={8} md={6} lg={4}>
-                                    <Card className="bg-secondary bg-gradient text-dark">
-                                        <Card.Img variant="top" src={track.img} width={300} height={300} style={{objectFit: "contain"}}/>
+                                    <Card className={`bg-gradient ${styles.card}`}>
+                                        <Card.Img variant="top" src={track.img} width={300} height={300} style={{ objectFit: "contain" }} />
                                         <Card.Body className="d-flex flex-column align-items-center">
-                                            <Card.Title>{track.title}</Card.Title>
-                                            <Card.Text>{track.artist}</Card.Text>
+                                            <Card.Title className={styles.text}>{track.title}</Card.Title>
+                                            <Card.Text className={styles.text}>{track.artist}</Card.Text>
                                             <PlayButton onClick={() => handleCardClick(track.trackUri)} />
                                         </Card.Body>
                                     </Card>
