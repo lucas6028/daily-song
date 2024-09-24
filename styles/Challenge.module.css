@@ -100,7 +100,7 @@
   background-color: #20c997; /* Cool green background */
   color: #fff; /* White text color for better contrast */
   border: none;
-  padding: 10px 20px;
+  padding: 10px;
   border-radius: 5px; /* Rounded corners for a smoother look */
   transition: all 0.3s ease; /* Smooth transition for hover and focus */
 }
