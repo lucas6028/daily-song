@@ -97,22 +97,29 @@
 }
 
 .frontButtonColor {
-  background-color: #20c997;
-  color: #000;
+  background-color: #20c997; /* Cool green background */
+  color: #fff; /* White text color for better contrast */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px; /* Rounded corners for a smoother look */
+  transition: all 0.3s ease; /* Smooth transition for hover and focus */
 }
 
 .frontButtonColor:hover {
-  opacity: 0.8;
-  transform: translateY(-2px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #17a589; /* Darker shade on hover */
+  color: #fff; /* Keep the text color white */
+  opacity: 0.9; /* Slight opacity change */
+  transform: translateY(-4px); /* Lift effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Increased shadow for depth */
 }
 
 .frontButtonColor:active {
-  transform: translateY(1px);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  background-color: #138f72; /* Even darker shade for active state */
+  transform: translateY(1px); /* Slight press effect */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Reduced shadow for pressed button */
 }
 
 .frontButtonColor:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(32, 201, 151, 0.5);
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 0 4px rgba(32, 201, 151, 0.6); /* Soft green focus ring */
 }
