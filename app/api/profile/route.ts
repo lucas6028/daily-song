@@ -1,14 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
-import spotifyAPI from "config/spotifyConfig";
+import { NextRequest, NextResponse } from 'next/server';
+import spotifyAPI from 'config/spotifyConfig';
 
 export async function GET(req: NextRequest) {
-  const accessToken = req.cookies.get("access_token")?.value;
+  const accessToken = req.cookies.get('access_token')?.value;
 
   if (!accessToken) {
-    return NextResponse.json(
-      { error: "Access token is missing" },
-      { status: 401 }
-    );
+    return NextResponse.json({ error: 'Access token is missing' }, { status: 401 });
   }
 
   spotifyAPI.setAccessToken(accessToken);
@@ -18,6 +15,6 @@ export async function GET(req: NextRequest) {
     const response = NextResponse.json(data);
     return response;
   } catch (err) {
-    console.error("Error while get profile: " + err);
+    console.error('Error while get profile: ' + err);
   }
 }

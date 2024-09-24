@@ -89,7 +89,7 @@ export interface SwipeableCardProps {
   onClick?: (newUri: string) => void;
   isActive: boolean;
   isSwiping: boolean;
-  swipeDirection: "left" | "right";
+  swipeDirection: 'left' | 'right';
 }
 
 interface ArtistImg {

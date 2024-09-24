@@ -7,13 +7,9 @@ import './globals.css';
 export const metadata = {
   title: 'Daily Song',
   description: 'Display top tracks, recommend tracks, and daily challenge',
-}
+};
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
@@ -31,5 +27,5 @@ export default function RootLayout({
       </head>
       <body>{children}</body>
     </html>
-  )
+  );
 }

@@ -1,13 +1,13 @@
-import axios from "axios";
+import axios from 'axios';
 
 async function refreshToken() {
   try {
-    const res = await axios.get("/api/auth/refresh", {
+    const res = await axios.get('/api/auth/refresh', {
       withCredentials: true,
     });
     console.log(res.data);
   } catch (err) {
-    console.error("Error while refresh token: " + err);
+    console.error('Error while refresh token: ' + err);
   }
 }
 

@@ -1,4 +1,4 @@
-import SpotifyWebAPI from "spotify-web-api-node";
+import SpotifyWebAPI from 'spotify-web-api-node';
 
 const spotifyAPI = new SpotifyWebAPI({
   redirectUri: process.env.NEXT_PUBLIC_REDIRECT_URL,

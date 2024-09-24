@@ -1,14 +1,14 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default async function requestAccess(urlCode: string) {
   if (!urlCode) {
-    console.error("Authorization code is missing from URL");
+    console.error('Authorization code is missing from URL');
     return;
   }
 
   await axios
     .post(
-      "/api/auth",
+      '/api/auth',
       {
         code: urlCode,
       },
@@ -16,12 +16,12 @@ export default async function requestAccess(urlCode: string) {
         withCredentials: true,
       }
     )
-    .then((res) => {
+    .then(res => {
       console.log(res.data);
 
-      window.history.pushState({}, "", "/login");
+      window.history.pushState({}, '', '/login');
     })
-    .catch((err) => {
-      console.error("Error posting code:", err);
+    .catch(err => {
+      console.error('Error posting code:', err);
     });
 }

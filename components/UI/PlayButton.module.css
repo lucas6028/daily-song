@@ -9,7 +9,9 @@
   align-items: center;
   width: 40px; /* Fixed width */
   height: 40px; /* Fixed height */
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  transition:
+    transform 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
 }
 
 .button:hover {

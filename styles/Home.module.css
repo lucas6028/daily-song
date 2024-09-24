@@ -5,7 +5,7 @@
   justify-content: space-between;
   height: 100vh;
   width: 100vw;
-  background-image: url("/images/audio-wave.jpg"); /* Background Image */
+  background-image: url('/images/audio-wave.jpg'); /* Background Image */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -65,9 +65,7 @@
     transform: translateY(0);
   }
   50% {
-    transform: translateY(
-      -10px
-    ); /* Reduced float distance to prevent going offscreen */
+    transform: translateY(-10px); /* Reduced float distance to prevent going offscreen */
   }
 }
 
@@ -100,7 +98,7 @@
 
 .button::before {
   position: absolute;
-  content: "";
+  content: '';
   background: var(--color);
   width: 150px;
   height: 200px;
