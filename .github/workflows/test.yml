@@ -31,3 +31,6 @@ jobs:
 
       - name: Run Tests
         run: npm run test
+
+      - name: Check Prettier and Eslint
+        run: npm run check
