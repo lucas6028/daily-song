@@ -168,11 +168,6 @@ function Challenge() {
     } else {
       console.log('The track name is correct!');
     }
-
-    console.log(selectedTrack);
-    console.log(selectedArtists);
-    console.log(tracks[0].title);
-    console.log(tracks[0].artist);
   };
 
   const handleTrackChange = (event: React.ChangeEvent<HTMLInputElement>) => {
