@@ -108,4 +108,20 @@ export async function POST(req: NextRequest) {
 }
 
 // logout the user
-export async function DELETE() {}
+export async function DELETE() {
+  console.log('delete cookie');
+  try {
+    const response = NextResponse.json({ message: 'Delete cookie successfull!', status: 200 });
+    response.cookies.set('access_token', '', {
+      maxAge: 0,
+    });
+    response.cookies.set('refresh_token', '', {
+      maxAge: 0,
+    });
+
+    return response;
+  } catch (err) {
+    console.error('Error while delete cookies: ' + err);
+    NextResponse.json({ message: 'Failed to delete cookie.', status: 400 });
+  }
+}

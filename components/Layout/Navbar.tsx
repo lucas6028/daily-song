@@ -1,13 +1,12 @@
 import { Image as BootstrapImage, Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
-import { handleLogout } from '../../lib/logout';
+import { useLogout } from 'hooks/useLogout';
 import NextImage from 'next/image';
 import axios from 'axios';
-// import logo from "/images/small_icon.png"
-// import logo from "/medium_icon.png";
 
 function NavBar() {
   const [profileImg, setProfileImg] = useState<string>('https://placehold.jp/150x150.png');
+  const { logout, isLoggingOut } = useLogout();
   const githubUrl = 'https://github.com/lucas6028/daily-song';
 
   useEffect(() => {
@@ -79,8 +78,8 @@ function NavBar() {
               <NavDropdown.Item href="#account">Account</NavDropdown.Item>
               <NavDropdown.Item href="#settings">Settings</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="/login" onClick={handleLogout}>
-                Logout
+              <NavDropdown.Item onClick={logout}>
+                {isLoggingOut ? 'Logging out...' : 'Logout'}
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
