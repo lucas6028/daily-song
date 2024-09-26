@@ -1,4 +1,5 @@
-// useLogout.ts
+'use client';
+
 import { useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
@@ -12,6 +13,7 @@ export const useLogout = () => {
 
     try {
       await axios.delete('/api/auth', { withCredentials: true });
+      window.localStorage.removeItem('profileImgUrl');
       router.push('/login');
     } catch (err) {
       console.error('Error while logging out:', err);

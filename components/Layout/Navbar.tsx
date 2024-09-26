@@ -1,3 +1,5 @@
+'use client'
+
 import { Image as BootstrapImage, Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { useLogout } from 'hooks/useLogout';
@@ -11,8 +13,16 @@ function NavBar() {
 
   useEffect(() => {
     const fetchProfile = async () => {
+      const imgUrl = window.localStorage.getItem('profileImgUrl');
+
+      if (imgUrl) {
+        setProfileImg(imgUrl);
+        return;
+      }
+
       try {
         const res = await axios.get('/api/profile', { withCredentials: true });
+        window.localStorage.setItem('profileImgUrl', res.data.body.images[0].url);
         setProfileImg(res.data.body.images[0].url);
       } catch (err) {
         console.error('Error while get user profile' + err);
