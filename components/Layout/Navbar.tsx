@@ -57,6 +57,8 @@ function NavBar() {
             <Nav.Link href="/top-tracks">Top Tracks</Nav.Link>
             <Nav.Link href="/recommend">Recommend</Nav.Link>
             <Nav.Link href="/challenge">Challenge</Nav.Link>
+          </Nav>
+          <Nav>
             <NavDropdown title="Reference" id="collapsible-nav-dropdown">
               <NavDropdown.Item href={githubUrl}>Github</NavDropdown.Item>
               <NavDropdown.Item href="https://spotify.com">Spotify</NavDropdown.Item>
@@ -66,9 +68,6 @@ function NavBar() {
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
             </NavDropdown>
-          </Nav>
-          <Nav>
-            <Nav.Link href="#deets">Home</Nav.Link>
             <Nav.Link eventKey={2} href="#memes">
               About
             </Nav.Link>
