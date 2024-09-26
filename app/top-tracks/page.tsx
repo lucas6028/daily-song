@@ -12,6 +12,7 @@ import NavBar from 'components/Layout/Navbar';
 import styles from 'styles/TopTracks.module.css';
 import spotifyPlayerStyles from 'styles/spotifyPlayerStyle';
 import Footer from 'components/Layout/Footer';
+import Loading from './loading';
 
 function TopTrack() {
   const [tracks, setTracks] = useState<Track[]>([]);
@@ -95,8 +96,7 @@ function TopTrack() {
   }, []);
 
   if (!isAuthenticated || loading) {
-    // return <Loading></Loading>;
-    return <p>Loading</p>;
+    return <Loading />;
   }
 
   if (error) {

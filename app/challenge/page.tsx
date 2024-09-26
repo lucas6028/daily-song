@@ -13,6 +13,7 @@ import { Artist, SpotifyArtistResponse, SpotifyTracksResponse, Track } from 'typ
 import NavBar from 'components/Layout/Navbar';
 import { compareNames, trimName } from 'lib/name';
 import Footer from 'components/Layout/Footer';
+import Loading from './loading';
 
 function Challenge() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -187,8 +188,7 @@ function Challenge() {
     tracks.length === 0
   ) {
     return (
-      // <Loading />
-      <p>loading</p>
+      <Loading />
     );
   }
 

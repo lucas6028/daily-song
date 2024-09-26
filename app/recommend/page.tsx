@@ -12,6 +12,7 @@ import axios from 'axios';
 import styles from 'styles/DailySong.module.css';
 import spotifyPlayerStyles from 'styles/spotifyPlayerStyle';
 import Footer from 'components/Layout/Footer';
+import Loading from './loading';
 
 function Recommend() {
   const [tracks, setTracks] = useState<Track[]>([]);
@@ -128,8 +129,7 @@ function Recommend() {
   }, [artists]);
 
   if (!isAuthenticated || loading) {
-    // return <Loading />;
-    return <p>loading</p>;
+    return <Loading />;
   }
   if (error) {
     return <p>{error}</p>;

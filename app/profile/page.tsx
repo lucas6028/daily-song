@@ -9,6 +9,7 @@ import NavBar from 'components/Layout/Navbar';
 import styles from 'styles/Profile.module.css';
 // import Loading from "../ui/loading/Loading";
 import Footer from 'components/Layout/Footer';
+import Loading from './loading';
 
 export default function Profile() {
   const defaultProfile = useMemo(
@@ -73,8 +74,7 @@ export default function Profile() {
 
   if (!isAuthenticated) {
     return (
-      <p>Loading</p>
-      // <Loading />
+      <Loading />
     );
   }
   return (
