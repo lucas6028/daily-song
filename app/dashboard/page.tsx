@@ -40,7 +40,7 @@ export default function Dashboard() {
   }, []);
 
   if (!isAuthenticated) {
-    return <Loading />
+    return <Loading />;
   }
 
   return (

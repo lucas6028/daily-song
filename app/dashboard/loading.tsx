@@ -7,5 +7,5 @@ export default function loading() {
       <Hamster />
       <h2>Loading...</h2>
     </div>
-  )
-};
+  );
+}
