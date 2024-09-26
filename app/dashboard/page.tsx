@@ -9,6 +9,7 @@ import NavBar from 'components/Layout/Navbar';
 import Footer from 'components/Layout/Footer';
 import styles from 'styles/Dashboard.module.css';
 import Image from 'next/image';
+import Loading from './loading';
 
 export default function Dashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -39,12 +40,7 @@ export default function Dashboard() {
   }, []);
 
   if (!isAuthenticated) {
-    return (
-      <div className="loading-screen d-flex flex-column align-items-center">
-        {/* <Hamster /> */}
-        <h2 className="loading-text">Loading...</h2>
-      </div>
-    );
+    return <Loading />
   }
 
   return (
