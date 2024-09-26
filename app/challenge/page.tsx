@@ -127,6 +127,9 @@ function Challenge() {
       if (relatedArtists.length === 0) return;
       const randomIndex = Math.floor(Math.random() * 4);
 
+      console.log('randomIndex:' + randomIndex);
+      console.log('answer artist: ' + relatedArtists[randomIndex].name);
+
       try {
         const res = await axios.get<SpotifyTracksResponse>('/api/artist/top-tracks', {
           params: {
@@ -135,7 +138,7 @@ function Challenge() {
           },
           withCredentials: true,
         });
-        console.log(res);
+
         const newTracks: Track[] = res.data.body.tracks.map(track => ({
           albumName: track.album.name,
           albumUri: track.album.uri,
@@ -161,6 +164,7 @@ function Challenge() {
     event.preventDefault();
     const trimTrackName = trimName(tracks[0].title);
     const trimSelectedTrackName = trimName(selectedTrack);
+
     if (compareNames(trimTrackName, trimSelectedTrackName)) {
       if (tracks[0].artist === selectedArtists) {
         console.log('Flip card!');
