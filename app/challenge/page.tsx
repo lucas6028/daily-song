@@ -187,9 +187,7 @@ function Challenge() {
     relatedArtists.length === 0 ||
     tracks.length === 0
   ) {
-    return (
-      <Loading />
-    );
+    return <Loading />;
   }
 
   if (error) {

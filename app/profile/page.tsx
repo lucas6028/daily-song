@@ -73,9 +73,7 @@ export default function Profile() {
   }, [fetchProfile]);
 
   if (!isAuthenticated) {
-    return (
-      <Loading />
-    );
+    return <Loading />;
   }
   return (
     <>
