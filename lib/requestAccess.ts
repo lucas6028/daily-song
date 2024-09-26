@@ -7,15 +7,7 @@ export default async function requestAccess(urlCode: string) {
   }
 
   await axios
-    .post(
-      '/api/auth',
-      {
-        code: urlCode,
-      },
-      {
-        withCredentials: true,
-      }
-    )
+    .post('/api/auth', { code: urlCode }, { withCredentials: true })
     .then(res => {
       console.log(res.data);
 
