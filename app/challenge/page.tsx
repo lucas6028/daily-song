@@ -4,16 +4,15 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button, Card, Form } from 'react-bootstrap';
 import axios from 'axios';
-// import Loading from "../ui/loading/Loading";
 import SpotifyWebPlayer from 'react-spotify-web-playback';
 import spotifyPlayerStyles from 'styles/spotifyPlayerStyle';
-// import PlayButton from "components/UI/PlayButton";
 import styles from 'styles/Challenge.module.css';
 import { Artist, SpotifyArtistResponse, SpotifyTracksResponse, Track } from 'types/types';
 import NavBar from 'components/Layout/Navbar';
 import { compareNames, trimName } from 'lib/name';
 import Footer from 'components/Layout/Footer';
 import Loading from './loading';
+import shuffleArray from 'lib/suffleArray';
 
 function Challenge() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -114,24 +113,28 @@ function Challenge() {
             imgUrl: art.images[1].url,
           })
         );
-        setRelatedArtists(newRelatedArtists);
+        setRelatedArtists(shuffleArray(newRelatedArtists));
       } catch (err) {
         console.error('Error while get related artists: ' + err);
       }
     };
 
+    fetchRelatedArtists();
+  }, [artists]);
+
+  useEffect(() => {
     const fetchArtistTopTracks = async () => {
-      if (artists.length === 0) return;
+      if (relatedArtists.length === 0) return;
+      const randomIndex = Math.floor(Math.random() * 4);
 
       try {
         const res = await axios.get<SpotifyTracksResponse>('/api/artist/top-tracks', {
           params: {
-            id: artists[0].id,
+            id: relatedArtists[randomIndex].id,
             market: 'TW',
           },
           withCredentials: true,
         });
-        console.log('Top tracks');
         console.log(res);
         const newTracks: Track[] = res.data.body.tracks.map(track => ({
           albumName: track.album.name,
@@ -151,9 +154,8 @@ function Challenge() {
       }
     };
 
-    fetchRelatedArtists();
     fetchArtistTopTracks();
-  }, [artists]);
+  }, [relatedArtists])
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -167,7 +169,7 @@ function Challenge() {
         console.log('The artist name is wrong...');
       }
     } else {
-      console.log('The track name is correct!');
+      console.log('The track name is wrong!');
     }
   };
 
@@ -228,10 +230,10 @@ function Challenge() {
                       <option value="" disabled hidden>
                         Select an artist...
                       </option>
-                      <option value={tracks[0].artist}>{tracks[0].artist}</option>
                       <option value={relatedArtists[0].name}>{relatedArtists[0].name}</option>
                       <option value={relatedArtists[1].name}>{relatedArtists[1].name}</option>
                       <option value={relatedArtists[2].name}>{relatedArtists[2].name}</option>
+                      <option value={relatedArtists[3].name}>{relatedArtists[3].name}</option>
                     </Form.Select>
                   </Form.Group>
 
