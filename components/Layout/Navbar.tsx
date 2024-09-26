@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { Image as BootstrapImage, Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
