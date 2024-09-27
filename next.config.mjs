@@ -19,11 +19,10 @@ const nextConfig = {
             key: 'Access-Control-Allow-Headers',
             value: 'Content-Type, Authorization',
           },
-          //   {
-          //     key: 'Content-Security-Policy',
-          //     value:
-          //       "default-src 'self'; script-src 'self'; object-src 'none'; frame-ancestors 'none';",
-          //   },
+          {
+            key: 'Content-Security-Policy',
+            value: "frame-ancestors 'none';",
+          },
           {
             key: 'Strict-Transport-Security',
             value: 'max-age=63072000; includeSubDomains; preload', // Two years HSTS policy
