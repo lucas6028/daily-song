@@ -22,7 +22,15 @@ function NavBar() {
 
       try {
         const res = await axios.get('/api/profile', { withCredentials: true });
+
         window.localStorage.setItem('profileImgUrl', res.data.body.images[0].url);
+        window.localStorage.setItem('country', res.data.country);
+        window.localStorage.setItem('email', res.data.email);
+        window.localStorage.setItem('followers', res.data.followers.total);
+        window.localStorage.setItem('href', res.data.href);
+        window.localStorage.setItem('userId', res.data.id);
+        window.localStorage.setItem('product', res.data.product);
+
         setProfileImg(res.data.body.images[0].url);
       } catch (err) {
         console.error('Error while get user profile' + err);
