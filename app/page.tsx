@@ -1,6 +1,6 @@
 'use client';
 
-import { GoogleAnalytics } from '@next/third-parties/google'
+import { GoogleAnalytics } from '@next/third-parties/google';
 import { useRouter } from 'next/navigation';
 import { Zoom, Slide } from 'react-awesome-reveal';
 import Image from 'next/image';
