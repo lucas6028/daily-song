@@ -1,50 +1,44 @@
-/* Set a fixed height for the container to center vertically */
-.containerHeight {
-  height: 75vh; /* Makes the container 100% of the viewport height */
-}
+/* YourComponent.module.css */
 
-/* Styling for the card */
 .card {
-  text-align: center;
-  border: 1px solid #fff;
+  border-radius: 12px;
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
   cursor: pointer;
-  width: 100%; /* Makes the card take up the full column width */
-  background-color: #1e3a8a;
-  color: #fff;
+  background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+  color: #333;
+  height: 400px; /* Set the card height */
+  margin-top: 10%;
 }
 
-/* Hover effect: scaling and adding a shadow */
 .card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Styling the icon container */
 .iconContainer {
-  margin-top: 20px;
+  background-color: white;
+  border-radius: 50%;
+  width: 200px; /* Set icon container width */
+  height: 200px; /* Set icon container height */
   display: flex;
-  justify-content: center;
   align-items: center;
-  height: 100px;
+  justify-content: center;
+  margin: 0 auto;
+  /* margin-top: -32px; */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Style the icons */
 .icon {
-  font-size: 4rem;
-  color: #007bff;
-  transition: color 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
-/* Change icon color on hover */
-.card:hover .icon {
-  color: #ff6347;
+.card-title {
+  font-weight: bold;
+  font-size: 1.2rem;
 }
 
-/* Active (clicked) state */
-.card:active {
-  transform: scale(0.98);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+.card-text {
+  color: #555;
 }

@@ -14,7 +14,6 @@ import Loading from './loading';
 export default function Dashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
-  const heartRoute = '/images/heart.svg';
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -49,20 +48,19 @@ export default function Dashboard() {
       <div className={`container mt-4 ${styles.containerHeight}`}>
         <Row className="d-flex justify-content-center align-items-center h-100">
           <Col md={3} className="mb-5 d-flex justify-content-center">
-            <Card className={styles.card} onClick={() => router.push('/top-tracks')}>
-              <div className={styles.iconContainer}>
+            <Card className={`${styles.card} shadow-lg`} onClick={() => router.push('/top-tracks')}>
+              <div className={`${styles.iconContainer} text-center`}>
                 <Image
-                  src={heartRoute}
+                  src="/images/sleep.png"
                   alt="heart"
-                  width={32}
-                  height={32}
+                  width={200}
+                  height={200}
                   className={styles.icon}
                 />
               </div>
-              <Card.Body>
-                <Card.Title>Top Tracks</Card.Title>
-                <Card.Text>Display your favorite tracks recently</Card.Text>
-                <Card.Text>All the songs you loved</Card.Text>
+              <Card.Body className="text-center">
+                <Card.Title className="fw-bold">Top Tracks</Card.Title>
+                <Card.Text className="text-muted">All the songs you loved</Card.Text>
               </Card.Body>
             </Card>
           </Col>
@@ -71,17 +69,16 @@ export default function Dashboard() {
             <Card className={styles.card} onClick={() => router.push('/recommend')}>
               <div className={styles.iconContainer}>
                 <Image
-                  src={heartRoute}
-                  alt="heart"
-                  width={32}
-                  height={32}
+                  src="/images/guitar.png"
+                  alt="guitar"
+                  width={200}
+                  height={200}
                   className={styles.icon}
                 />
               </div>
               <Card.Body>
-                <Card.Title>Recommend Tracks</Card.Title>
-                <Card.Text>Display recommend tracks for you</Card.Text>
-                <Card.Text>Base on your favorite</Card.Text>
+                <Card.Title className="fw-bold">Recommend Tracks</Card.Title>
+                <Card.Text className="text-muted">Display recommend tracks</Card.Text>
               </Card.Body>
             </Card>
           </Col>
@@ -90,17 +87,16 @@ export default function Dashboard() {
             <Card className={styles.card} onClick={() => router.push('/challenge')}>
               <div className={styles.iconContainer}>
                 <Image
-                  src={heartRoute}
-                  alt="heart"
-                  width={32}
-                  height={32}
+                  src="/images/stero.png"
+                  alt="stero system"
+                  width={200}
+                  height={200}
                   className={styles.icon}
                 />
               </div>
               <Card.Body>
-                <Card.Title>Challenge</Card.Title>
-                <Card.Text>Guess the song name and singer</Card.Text>
-                <Card.Text>Explore more songs</Card.Text>
+                <Card.Title className="fw-bold">Challenge Tracks</Card.Title>
+                <Card.Text className="text-muted">Guess song and singer</Card.Text>
               </Card.Body>
             </Card>
           </Col>
