@@ -1,6 +1,6 @@
 'use client';
 
-import { GoogleAnalytics } from '@next/third-parties/google';
+// import { GoogleAnalytics } from '@next/third-parties/google';
 import { useRouter } from 'next/navigation';
 import { Zoom, Slide } from 'react-awesome-reveal';
 import Image from 'next/image';
@@ -14,7 +14,6 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <GoogleAnalytics gaId="G-0RRDH6KHKD" />
       <div className={styles.container}>
         <Zoom triggerOnce>
           <Image

@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import './globals.css';
-import { GoogleAnalytics } from '@next/third-parties/google';
+// import { GoogleAnalytics } from '@next/third-parties/google';
 // import { Inter } from 'next/font/google'
 
 // const inter = Inter({ subsets: ['latin'] })
@@ -27,7 +27,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta property="og:type" content="website" />
       </head>
       <body>{children}</body>
-      <GoogleAnalytics gaId="G-0RRDH6KHKD" />
     </html>
   );
 }
