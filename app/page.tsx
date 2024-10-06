@@ -1,5 +1,6 @@
 'use client';
 
+import { GoogleAnalytics } from '@next/third-parties/google'
 import { useRouter } from 'next/navigation';
 import { Zoom, Slide } from 'react-awesome-reveal';
 import Image from 'next/image';
@@ -12,26 +13,29 @@ const Home: React.FC = () => {
   const router = useRouter();
 
   return (
-    <div className={styles.container}>
-      <Zoom triggerOnce>
-        <Image
-          src="/images/medium_icon.png"
-          // src={brand}
-          alt="Daily Song"
-          width={237}
-          height={203}
-          className={styles.image}
-        />
-      </Zoom>
-      <Slide direction="up" triggerOnce>
-        <HomeButton onClick={() => router.push('/dashboard')} />
-      </Slide>
+    <>
+      <GoogleAnalytics gaId="G-0RRDH6KHKD" />
+      <div className={styles.container}>
+        <Zoom triggerOnce>
+          <Image
+            src="/images/medium_icon.png"
+            // src={brand}
+            alt="Daily Song"
+            width={237}
+            height={203}
+            className={styles.image}
+          />
+        </Zoom>
+        <Slide direction="up" triggerOnce>
+          <HomeButton onClick={() => router.push('/dashboard')} />
+        </Slide>
 
-      <Zoom triggerOnce>
-        <p className={styles.text}>Display top tracks, recommend tracks, and daily challenge</p>
-      </Zoom>
-      <Footer />
-    </div>
+        <Zoom triggerOnce>
+          <p className={styles.text}>Display top tracks, recommend tracks, and daily challenge</p>
+        </Zoom>
+        <Footer />
+      </div>
+    </>
   );
 };
 
