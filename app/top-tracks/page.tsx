@@ -104,8 +104,8 @@ function TopTrack() {
 
   return (
     <>
-      <NavBar />
       <Container className="my-1">
+        <NavBar />
         <Carousel>
           {tracks.map(track => (
             <Carousel.Item key={track.id}>
