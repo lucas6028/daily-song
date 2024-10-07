@@ -92,8 +92,8 @@ function NavBar() {
               id="profile-nav-dropdown"
             >
               <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-              <NavDropdown.Item href="#account">Account</NavDropdown.Item>
-              <NavDropdown.Item href="#settings">Settings</NavDropdown.Item>
+              <NavDropdown.Item href="/account">Account</NavDropdown.Item>
+              <NavDropdown.Item href="/setting">Setting</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item onClick={logout}>
                 {isLoggingOut ? 'Logging out...' : 'Logout'}
