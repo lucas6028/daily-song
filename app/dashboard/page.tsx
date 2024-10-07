@@ -43,8 +43,8 @@ export default function Dashboard() {
 
   return (
     <>
-      <NavBar />
       <div className={`container mt-4 ${styles.containerHeight}`}>
+        <NavBar />
         <Row className="d-flex justify-content-center align-items-center h-100">
           <Col md={3} className="mb-5 d-flex justify-content-center">
             <Card className={`${styles.card} shadow-lg`} onClick={() => router.push('/top-tracks')}>

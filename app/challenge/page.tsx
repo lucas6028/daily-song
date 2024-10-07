@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Button, Card, Form } from 'react-bootstrap';
+import { Button, Card, Container, Form } from 'react-bootstrap';
 import axios from 'axios';
 import SpotifyWebPlayer from 'react-spotify-web-playback';
 import spotifyPlayerStyles from 'styles/spotifyPlayerStyle';
@@ -201,7 +201,7 @@ function Challenge() {
   }
 
   return (
-    <>
+    <Container className="mx-auto p-2">
       <NavBar />
       <div className={`${styles.cardContainer} ${isFlipped ? styles.flipped : ''}`}>
         <div className={`d-flex justify-content-center mt-4 ${styles.cardInner}`}>
@@ -316,7 +316,7 @@ function Challenge() {
       </div>
 
       <Footer />
-    </>
+    </Container>
   );
 }
 
