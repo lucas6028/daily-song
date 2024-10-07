@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import redirectURL from 'lib/redirectURL';
 import requestAccess from 'lib/requestAccess';
-// import spotifyLogo from '../../assets/Spotify_logo_with_text.svg';
 
 const Login: React.FC = () => {
   const [urlCode, setUrlCode] = useState<string | null>(null);

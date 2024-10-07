@@ -4,7 +4,6 @@ import { Carousel, Card, Container, Row, Col } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { Artist, SpotifyArtistResponse, SpotifyTracksResponse, Track } from 'types/types';
 import { useRouter } from 'next/navigation';
-// import Loading from '../ui/loading/Loading';
 import SpotifyWebPlayer from 'react-spotify-web-playback';
 import PlayButton from 'components/UI/PlayButton';
 import NavBar from 'components/Layout/Navbar';

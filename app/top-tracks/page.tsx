@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { SpotifyItemsResponse, Track } from 'types/types';
 import axios from 'axios';
-// import Loading from "../ui/loading/Loading";
 import SpotifyWebPlayer from 'react-spotify-web-playback';
 import PlayButton from 'components/UI/PlayButton';
 import NavBar from 'components/Layout/Navbar';

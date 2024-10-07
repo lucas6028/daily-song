@@ -7,7 +7,6 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import NavBar from 'components/Layout/Navbar';
 import styles from 'styles/Profile.module.css';
-// import Loading from "../ui/loading/Loading";
 import Footer from 'components/Layout/Footer';
 import Loading from './loading';
 
