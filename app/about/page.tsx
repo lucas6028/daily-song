@@ -1,6 +1,6 @@
-import Footer from 'components/Layout/Footer'
-import MarkdownContent from 'components/Layout/MarkdownContent'
-import NavBar from 'components/Layout/Navbar'
+import Footer from 'components/Layout/Footer';
+import MarkdownContent from 'components/Layout/MarkdownContent';
+import NavBar from 'components/Layout/Navbar';
 
 const markdownText = `
 ## 網站介紹
@@ -45,16 +45,16 @@ const markdownText = `
 [目前網站 Source Code (GitHub)](https://github.com/lucas6028/daily-song)
 
 [原網站 Source Code (GitHub)](https://github.com/lucas6028/daily-song-express)
-`
+`;
 
 export default function About() {
-    return (
-        <div className="container mx-auto p-4">
-            <NavBar />
-            <div className="prose lg:prose-xl jusify-content-center align-items-center">
-                <MarkdownContent content={markdownText} />
-            </div>
-            <Footer />
-        </div>
-    )
+  return (
+    <div className="container mx-auto p-4">
+      <NavBar />
+      <div className="prose lg:prose-xl jusify-content-center align-items-center">
+        <MarkdownContent content={markdownText} />
+      </div>
+      <Footer />
+    </div>
+  );
 }
