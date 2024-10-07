@@ -76,7 +76,7 @@ function NavBar() {
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link eventKey={2} href="#memes">
+            <Nav.Link eventKey={2} href="/about">
               About
             </Nav.Link>
             <NavDropdown
