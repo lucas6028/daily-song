@@ -1,6 +1,7 @@
 import Footer from 'components/Layout/Footer';
 import MarkdownContent from 'components/Layout/MarkdownContent';
 import NavBar from 'components/Layout/Navbar';
+import { Container } from 'react-bootstrap';
 
 const markdownText = `
 ## 網站介紹
@@ -49,12 +50,14 @@ const markdownText = `
 
 export default function About() {
   return (
-    <div className="container mx-auto p-4">
-      <NavBar />
-      <div className="prose lg:prose-xl jusify-content-center align-items-center">
-        <MarkdownContent content={markdownText} />
+    <Container>
+      <div className="container mx-auto p-4">
+        <NavBar />
+        <div className="prose lg:prose-xl jusify-content-center align-items-center">
+          <MarkdownContent content={markdownText} />
+        </div>
       </div>
       <Footer />
-    </div>
+    </Container>
   );
 }
