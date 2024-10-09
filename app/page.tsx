@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { Zoom, Slide } from 'react-awesome-reveal';
 import Image from 'next/image';
 import styles from 'styles/Home.module.css';
@@ -9,8 +8,6 @@ import HomeButton from 'components/UI/HomeButton';
 import Footer from 'components/Layout/Footer';
 
 const Home: React.FC = () => {
-  const router = useRouter();
-
   return (
     <div className={styles.container}>
       <Zoom triggerOnce>
@@ -24,7 +21,7 @@ const Home: React.FC = () => {
         />
       </Zoom>
       <Slide direction="up" triggerOnce>
-        <HomeButton onClick={() => router.push('/dashboard')} />
+        <HomeButton onClick={() => console.log('Navigate to dashboard')} />
       </Slide>
 
       <Zoom triggerOnce>
