@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styles from './HomeButton.module.css';
 
 interface HomeButtonProps {
@@ -6,7 +7,7 @@ interface HomeButtonProps {
 
 export default function HomeButton({ onClick }: HomeButtonProps) {
   return (
-    <button type="button" className={styles.homeBtn} onClick={onClick}>
+    <Link href="/dashboard" type="button" className={styles.homeBtn} onClick={onClick}>
       <strong className={styles.homeBtnText}>DASHBOARD</strong>
       <div className={styles.containerStars}>
         <div className={styles.stars}></div>
@@ -16,6 +17,6 @@ export default function HomeButton({ onClick }: HomeButtonProps) {
         <div className={styles.homeCircle}></div>
         <div className={styles.homeCircle}></div>
       </div>
-    </button>
+    </Link>
   );
 }
