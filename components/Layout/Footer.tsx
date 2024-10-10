@@ -1,13 +1,14 @@
-import React from 'react';
+import React from 'react'
+import styles from 'styles/Footer.module.css'
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-gray-800 text-white p-4 mt-8">
-      <div className="container mx-auto">
-        <p className="text-center">&copy; 2024 Hao-Ping Chen. All rights reserved.</p>
+    <footer>
+      <div>
+        <p className={styles.text}>&copy; 2024 Hao-Ping Chen. All rights reserved.</p>
       </div>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer
