@@ -98,7 +98,7 @@ function TopTrack() {
     };
 
     fetchTopTracks();
-  }, [access_token])
+  }, [access_token]);
 
   if (!isAuthenticated || loading) {
     return <Loading />;

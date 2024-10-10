@@ -95,7 +95,7 @@ function Challenge() {
     };
 
     fetchTopArtists();
-  }, [access_token])
+  }, [access_token]);
 
   useEffect(() => {
     const fetchRelatedArtists = async () => {
