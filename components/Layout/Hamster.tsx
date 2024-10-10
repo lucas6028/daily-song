@@ -1,5 +1,4 @@
-// import "./Hamster.module.css";
-import './Hamster.css';
+import 'styles/Hamster.css';
 
 function Hamster() {
   return (
