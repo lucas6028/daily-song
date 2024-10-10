@@ -1,4 +1,4 @@
-import styles from './PlayButton.module.css';
+import styles from 'styles/PlayButton.module.css';
 import Image from 'next/image';
 
 interface PlayButtonProps {
