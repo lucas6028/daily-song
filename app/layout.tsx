@@ -27,7 +27,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta property="og:url" content="https://dailysong.vercel.app" />
         <meta property="og:type" content="website" />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+      </body>
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-0RRDH6KHKD"
         strategy="afterInteractive"
