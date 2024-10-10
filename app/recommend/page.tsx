@@ -61,6 +61,13 @@ function Recommend() {
         console.error('Error while get token: ' + err);
       }
     };
+
+    fetchToken();
+  }, []);
+
+  useEffect(() => {
+    if (!access_token) return;
+
     const fetchTopArtists = async () => {
       try {
         const res = await axios.get('/api/artist/my-top', {
@@ -86,9 +93,8 @@ function Recommend() {
       }
     };
 
-    fetchToken();
     fetchTopArtists();
-  }, []);
+  }, [access_token]);
 
   useEffect(() => {
     const fetchRecommendTracks = async () => {
@@ -131,7 +137,7 @@ function Recommend() {
     return <Loading />;
   }
   if (error) {
-    return <p>{error}</p>;
+    throw new Error(error);
   }
   return (
     <>
