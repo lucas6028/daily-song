@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from './HomeButton.module.css';
+import styles from 'styles/HomeButton.module.css';
 
 interface HomeButtonProps {
   onClick: () => void;
