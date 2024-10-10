@@ -1,5 +1,5 @@
-import React from 'react'
-import styles from 'styles/Footer.module.css'
+import React from 'react';
+import styles from 'styles/Footer.module.css';
 
 const Footer: React.FC = () => {
   return (
@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
         <p className={styles.text}>&copy; 2024 Hao-Ping Chen. All rights reserved.</p>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
