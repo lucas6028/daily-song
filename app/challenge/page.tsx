@@ -65,8 +65,13 @@ function Challenge() {
         console.error('Error while get token: ' + err);
       }
     };
+    fetchToken();
+  }, []);
 
+  useEffect(() => {
     const fetchTopArtists = async () => {
+      if (!access_token) return;
+
       try {
         const res = await axios.get('/api/artist/my-top', {
           params: {
@@ -89,9 +94,8 @@ function Challenge() {
       }
     };
 
-    fetchToken();
     fetchTopArtists();
-  }, []);
+  }, [access_token])
 
   useEffect(() => {
     const fetchRelatedArtists = async () => {
@@ -127,8 +131,8 @@ function Challenge() {
       if (relatedArtists.length === 0) return;
       const randomIndex = Math.floor(Math.random() * 4);
 
-      console.log('randomIndex:' + randomIndex);
-      console.log('answer artist: ' + relatedArtists[randomIndex].name);
+      // console.log('randomIndex:' + randomIndex);
+      // console.log('answer artist: ' + relatedArtists[randomIndex].name);
 
       try {
         const res = await axios.get<SpotifyTracksResponse>('/api/artist/top-tracks', {
@@ -197,7 +201,7 @@ function Challenge() {
   }
 
   if (error) {
-    return <p>{error}</p>;
+    throw new Error(error);
   }
 
   return (
