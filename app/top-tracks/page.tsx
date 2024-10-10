@@ -63,6 +63,13 @@ function TopTrack() {
         console.error('Error while get token: ' + err);
       }
     };
+
+    fetchToken();
+  }, []);
+
+  useEffect(() => {
+    if (!access_token) return;
+
     const fetchTopTracks = async () => {
       try {
         const res = await axios.get<SpotifyItemsResponse>('/api/track/my-top', {
@@ -90,9 +97,8 @@ function TopTrack() {
       }
     };
 
-    fetchToken();
     fetchTopTracks();
-  }, []);
+  }, [access_token])
 
   if (!isAuthenticated || loading) {
     return <Loading />;
