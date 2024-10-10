@@ -3,7 +3,6 @@
 import { Zoom, Slide } from 'react-awesome-reveal';
 import Image from 'next/image';
 import styles from 'styles/Home.module.css';
-// import brand from "medium_icon.png";
 import HomeButton from 'components/UI/HomeButton';
 import Footer from 'components/Layout/Footer';
 
@@ -13,7 +12,6 @@ const Home: React.FC = () => {
       <Zoom triggerOnce>
         <Image
           src="/images/medium_icon.png"
-          // src={brand}
           alt="Daily Song"
           width={237}
           height={203}
