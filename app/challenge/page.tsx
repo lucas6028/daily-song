@@ -164,6 +164,11 @@ function Challenge() {
     fetchArtistTopTracks();
   }, [relatedArtists]);
 
+  useEffect(() => {
+    if (tracks.length === 0) return;
+    setUri(tracks[0].trackUri);
+  }, [tracks]);
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const trimTrackName = trimName(tracks[0].title);
@@ -257,7 +262,7 @@ function Challenge() {
                     <Button
                       variant="info"
                       className={`w-100 me-2 ${styles.frontButtonColor}`}
-                      onClick={() => setUri(tracks[0].trackUri)}
+                      onClick={() => setPlay(!play)}
                     >
                       Play
                     </Button>
