@@ -69,12 +69,11 @@ function NavBar() {
           <Nav>
             <NavDropdown title="Reference" id="collapsible-nav-dropdown">
               <NavDropdown.Item href={githubUrl}>Github</NavDropdown.Item>
+              <NavDropdown.Divider />
               <NavDropdown.Item href="https://spotify.com">Spotify</NavDropdown.Item>
               <NavDropdown.Item href="https://developer.spotify.com/">
                 Spotify for Developer
               </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
             </NavDropdown>
             <Nav.Link eventKey={2} href="/about">
               About
