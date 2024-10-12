@@ -23,7 +23,7 @@ export function useTopArtist(limit: number) {
   );
 
   const artists: Artist[] =
-    data?.body.tracks.map((art: SpotifyArtistResponse) => ({
+    data?.map((art: SpotifyArtistResponse) => ({
       name: art.name,
       id: art.id,
       popularity: art.popularity,
