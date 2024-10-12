@@ -2,7 +2,7 @@ import useSWR from 'swr';
 import axios from 'axios';
 import type { Artist, SpotifyArtistResponse } from 'types/types';
 
-export function useTopArtist(limit: number) {
+export function useTopArtist(limit = 1, offset = 0) {
   const { data, error } = useSWR(
     '/api/artist/my-top',
     (url: string) =>
@@ -10,7 +10,7 @@ export function useTopArtist(limit: number) {
         .get(url, {
           params: {
             limit: limit,
-            offset: Math.floor(Math.random() * 21),
+            offset: offset,
           },
           withCredentials: true,
         })
