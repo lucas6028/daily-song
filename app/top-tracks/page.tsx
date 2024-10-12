@@ -72,8 +72,8 @@ function TopTrack() {
 
   useEffect(() => {
     if (tracksError) {
-      console.error('Error fetching top artists:', tracksError);
-      setError('Failed to fetch top artists');
+      console.error('Error fetching top tracks:', tracksError);
+      setError('Failed to fetch top tracks');
     } else if (tracksData) {
       const newTracks = tracksData.map((track: TrackItem) => ({
         albumName: track.album.name,
