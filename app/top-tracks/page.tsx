@@ -1,9 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
 import { Carousel, Container, Card, Row, Col } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
+import useSWR from 'swr';
 import { useRouter } from 'next/navigation';
-import { SpotifyItemsResponse, Track } from 'types/types';
+import { Track, TrackItem } from 'types/types';
 import axios from 'axios';
 import SpotifyWebPlayer from 'react-spotify-web-playback';
 import PlayButton from 'components/UI/PlayButton';
@@ -23,28 +25,42 @@ function TopTrack() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
 
+  // SWR
+  const fetcher = (url: string) => axios.get(url, { withCredentials: true }).then(res => res.data);
+  const { data: authData, error: authError } = useSWR('/api/auth', fetcher);
+  const { data: tokenData, error: tokenError } = useSWR('/api/auth/token', fetcher);
+  const { data: tracksData, error: tracksError } = useSWR('/api/track/my-top', (url: string) =>
+    axios
+      .get(url, {
+        params: { limit: 10 },
+        withCredentials: true,
+      })
+      .then(res => res.data.body.items)
+  );
+
   useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const response = await axios.get('/api/auth', { withCredentials: true });
+    setPlay(true);
+  }, [uri]);
 
-        if (response.data.authenticated) {
-          // User is authenticated (either access token is valid or refreshed)
-          setIsAuthenticated(true);
-        } else {
-          // No access token, no refresh token, or refresh failed
-          console.log(response.data.message);
-          router.push('/login');
-        }
-      } catch (error) {
-        console.error('Error checking auth status:', error);
-        router.push('/login');
-      }
-    };
+  useEffect(() => {
+    if (authError) {
+      console.error('Error checking auth status:', authError);
+      router.push('/login');
+    } else if (authData && !authData.authenticated) {
+      router.push('/login');
+    } else if (authData && authData.authenticated) {
+      setIsAuthenticated(true);
+    }
+  }, [authData, authError]);
 
-    checkAuth();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  useEffect(() => {
+    if (tokenError) {
+      console.error('Error while getting token:', tokenError);
+      throw new Error(tokenError);
+    } else if (tokenData) {
+      setAccessToken(tokenData.access_token.value);
+    }
+  }, [tokenData, tokenError]);
 
   const handleCardClick = (newUri: string) => {
     setUri(newUri);
@@ -55,57 +71,31 @@ function TopTrack() {
   }, [uri]);
 
   useEffect(() => {
-    const fetchToken = async () => {
-      try {
-        const res = await axios.get('/api/auth/token', { withCredentials: true });
-        setAccessToken(res.data.access_token.value);
-      } catch (err) {
-        console.error('Error while get token: ' + err);
-      }
-    };
-
-    fetchToken();
-  }, []);
-
-  useEffect(() => {
-    if (!access_token) return;
-
-    const fetchTopTracks = async () => {
-      try {
-        const res = await axios.get<SpotifyItemsResponse>('/api/track/my-top', {
-          params: {
-            limit: 10,
-          },
-          withCredentials: true,
-        });
-        const newTracks = res.data.body.items.map(track => ({
-          albumName: track.album.name,
-          albumUri: track.album.uri,
-          img: track.album.images[1].url,
-          artist: track.artists[0].name,
-          artistUri: track.artists[0].uri,
-          title: track.name,
-          id: track.id,
-          trackUri: track.uri,
-        }));
-        setTracks(newTracks);
-      } catch (err) {
-        console.error(err);
-        setError('Failed to fetch top tracks.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTopTracks();
-  }, [access_token]);
+    if (tracksError) {
+      console.error('Error fetching top artists:', tracksError);
+      setError('Failed to fetch top artists');
+    } else if (tracksData) {
+      const newTracks = tracksData.map((track: TrackItem) => ({
+        albumName: track.album.name,
+        albumUri: track.album.uri,
+        img: track.album.images[1].url,
+        artist: track.artists[0].name,
+        artistUri: track.artists[0].uri,
+        title: track.name,
+        id: track.id,
+        trackUri: track.uri,
+      }));
+      setTracks(newTracks);
+    }
+    setLoading(false);
+  }, [tracksData, tracksError]);
 
   if (!isAuthenticated || loading) {
     return <Loading />;
   }
 
   if (error) {
-    return <p>{error}</p>;
+    throw new Error(error);
   }
 
   return (
