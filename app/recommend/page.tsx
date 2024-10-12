@@ -13,7 +13,7 @@ import axios from 'axios';
 import styles from 'styles/DailySong.module.css';
 import spotifyPlayerStyles from 'styles/spotifyPlayerStyle';
 import Footer from 'components/Layout/Footer';
-import Loading from './loading';
+// import Loading from './loading';
 import { useRecommendedTracks } from 'hooks/useRecommendTracks';
 
 // Dynamically import SpotifyWebPlayer
@@ -55,7 +55,7 @@ function Recommend() {
         .then(res => res.data.body.items),
     { revalidateOnFocus: false }
   );
-  const { tracks, isLoading = false, tracksError } = useRecommendedTracks(artists, minPopularity);
+  const { tracks, isLoading, tracksError } = useRecommendedTracks(artists, minPopularity);
 
   useEffect(() => {
     if (authError) {
@@ -103,7 +103,7 @@ function Recommend() {
   }, [isLoading, error, isAuthenticated, tracksError]);
 
   if (!isReady) {
-    return <Loading />;
+    return null;
   }
   if (error) {
     throw new Error(error);
