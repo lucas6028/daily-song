@@ -5,7 +5,6 @@ import { Carousel, Card, Container, Row, Col } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import dynamic from 'next/dynamic';
-import { Artist, SpotifyArtistResponse } from 'types/types';
 import { useRouter } from 'next/navigation';
 import PlayButton from 'components/UI/PlayButton';
 import NavBar from 'components/Layout/Navbar';
@@ -16,6 +15,7 @@ import Footer from 'components/Layout/Footer';
 import Loading from './loading';
 import { useRecommendedTracks } from 'hooks/useRecommendTracks';
 import { sleep } from 'lib/sleep';
+import { useTopArtist } from 'hooks/useTopArtist';
 
 // Dynamically import SpotifyWebPlayer
 const SpotifyWebPlayer = dynamic(() => import('react-spotify-web-playback'), {
@@ -24,13 +24,12 @@ const SpotifyWebPlayer = dynamic(() => import('react-spotify-web-playback'), {
 });
 
 function Recommend() {
+  const minPopularity = 10;
+  const LIMIT = 1;
   const [isReady, setIsReady] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
   const [uri, setUri] = useState<string>('');
   const [play, setPlay] = useState<boolean>(false);
-  const [artists, setArtists] = useState<Artist[]>([]);
   const [access_token, setAccessToken] = useState<string | null>(null);
-  const minPopularity = 10;
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
 
@@ -42,20 +41,7 @@ function Recommend() {
   const { data: tokenData, error: tokenError } = useSWR('/api/auth/token', fetcher, {
     revalidateOnFocus: false,
   });
-  const { data: topArtistsData, error: topArtistsError } = useSWR(
-    '/api/artist/my-top',
-    (url: string) =>
-      axios
-        .get(url, {
-          params: {
-            limit: 1,
-            offset: Math.floor(Math.random() * 21),
-          },
-          withCredentials: true,
-        })
-        .then(res => res.data.body.items),
-    { revalidateOnFocus: false }
-  );
+  const { artists, artistsError } = useTopArtist(LIMIT);
   const { tracks, isLoading, tracksError } = useRecommendedTracks(artists, minPopularity);
 
   useEffect(() => {
@@ -82,33 +68,17 @@ function Recommend() {
   }, [uri]);
 
   useEffect(() => {
-    if (topArtistsError) {
-      console.error('Error fetching top artist: ', topArtistsError);
-      setError('Failed to fetch top artists');
-    } else if (topArtistsData) {
-      const newArtists: Artist[] = topArtistsData.map((art: SpotifyArtistResponse) => ({
-        name: art.name,
-        id: art.id,
-        popularity: art.popularity,
-        uri: art.uri,
-        imgUrl: art.images[1].url,
-      }));
-      setArtists(newArtists);
-    }
-  }, [topArtistsData, topArtistsError]);
-
-  useEffect(() => {
-    if (!isLoading && !error && isAuthenticated && !tracksError) {
+    if (!isLoading && !artistsError && isAuthenticated && !tracksError) {
       setIsReady(true);
       sleep(1000);
     }
-  }, [isLoading, error, isAuthenticated, tracksError]);
+  }, [isLoading, artistsError, isAuthenticated, tracksError]);
 
   if (!isReady) {
     return <Loading />;
   }
-  if (error) {
-    throw new Error(error);
+  if (artistsError) {
+    throw new Error(artistsError);
   }
   if (tracksError) {
     throw new Error(tracksError);
