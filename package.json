@@ -26,7 +26,8 @@
     "remark": "^15.0.1",
     "remark-gfm": "^4.0.0",
     "remark-html": "^16.0.1",
-    "spotify-web-api-node": "^5.0.2"
+    "spotify-web-api-node": "^5.0.2",
+    "swr": "^2.2.5"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.0",
