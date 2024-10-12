@@ -7,7 +7,6 @@ import useSWR from 'swr';
 import dynamic from 'next/dynamic';
 import { Artist, SpotifyArtistResponse } from 'types/types';
 import { useRouter } from 'next/navigation';
-// import SpotifyWebPlayer from 'react-spotify-web-playback';
 import PlayButton from 'components/UI/PlayButton';
 import NavBar from 'components/Layout/Navbar';
 import axios from 'axios';
@@ -24,8 +23,7 @@ const SpotifyWebPlayer = dynamic(() => import('react-spotify-web-playback'), {
 });
 
 function Recommend() {
-  // const [tracks, setTracks] = useState<Track[]>([]);
-  // const [loading, setLoading] = useState<boolean>(true);
+  const [isReady, setIsReady] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [uri, setUri] = useState<string>('');
   const [play, setPlay] = useState<boolean>(false);
@@ -57,7 +55,7 @@ function Recommend() {
         .then(res => res.data.body.items),
     { revalidateOnFocus: false }
   );
-  const { tracks, isLoading, tracksError } = useRecommendedTracks(artists, minPopularity);
+  const { tracks, isLoading = false, tracksError } = useRecommendedTracks(artists, minPopularity);
 
   useEffect(() => {
     if (authError) {
@@ -98,7 +96,13 @@ function Recommend() {
     }
   }, [topArtistsData, topArtistsError]);
 
-  if (!isAuthenticated || isLoading) {
+  useEffect(() => {
+    if (!isLoading && !error && isAuthenticated && !tracksError) {
+      setIsReady(true);
+    }
+  }, [isLoading, error, isAuthenticated, tracksError]);
+
+  if (!isReady) {
     return <Loading />;
   }
   if (error) {
