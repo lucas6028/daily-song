@@ -13,27 +13,26 @@ import axios from 'axios';
 import styles from 'styles/DailySong.module.css';
 import spotifyPlayerStyles from 'styles/spotifyPlayerStyle';
 import Footer from 'components/Layout/Footer';
-// import Loading from './loading';
+import Loading from './loading';
 import { useRecommendedTracks } from 'hooks/useRecommendTracks';
 
 // Dynamically import SpotifyWebPlayer
 const SpotifyWebPlayer = dynamic(() => import('react-spotify-web-playback'), {
-  ssr: false, // Disable server-side rendering for this component
+  ssr: false,
   loading: () => <div>Loading player...</div>,
 });
 
-function Recommend() {
-  const [isReady, setIsReady] = useState<boolean>(false);
+export default function Recommend() {
+  const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [uri, setUri] = useState<string>('');
-  const [play, setPlay] = useState<boolean>(false);
+  const [uri, setUri] = useState('');
+  const [play, setPlay] = useState(false);
   const [artists, setArtists] = useState<Artist[]>([]);
   const [access_token, setAccessToken] = useState<string | null>(null);
   const minPopularity = 10;
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
 
-  // SWR
   const fetcher = (url: string) => axios.get(url, { withCredentials: true }).then(res => res.data);
   const { data: authData, error: authError } = useSWR('/api/auth', fetcher, {
     revalidateOnFocus: false,
@@ -46,10 +45,7 @@ function Recommend() {
     (url: string) =>
       axios
         .get(url, {
-          params: {
-            limit: 1,
-            offset: Math.floor(Math.random() * 21),
-          },
+          params: { limit: 1, offset: Math.floor(Math.random() * 21) },
           withCredentials: true,
         })
         .then(res => res.data.body.items),
@@ -66,7 +62,7 @@ function Recommend() {
     } else if (authData && authData.authenticated) {
       setIsAuthenticated(true);
     }
-  }, [authData, authError]);
+  }, [authData, authError, router]);
 
   useEffect(() => {
     if (tokenError) {
@@ -103,14 +99,17 @@ function Recommend() {
   }, [isLoading, error, isAuthenticated, tracksError]);
 
   if (!isReady) {
-    return null;
+    return <Loading />;
   }
+
   if (error) {
     throw new Error(error);
   }
+
   if (tracksError) {
     throw new Error(tracksError);
   }
+
   return (
     <>
       <Container className="my-1">
@@ -163,5 +162,3 @@ function Recommend() {
     </>
   );
 }
-
-export default Recommend;
