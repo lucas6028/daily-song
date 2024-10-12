@@ -15,6 +15,7 @@ import spotifyPlayerStyles from 'styles/spotifyPlayerStyle';
 import Footer from 'components/Layout/Footer';
 import Loading from './loading';
 import { useRecommendedTracks } from 'hooks/useRecommendTracks';
+import { sleep } from 'lib/sleep';
 
 // Dynamically import SpotifyWebPlayer
 const SpotifyWebPlayer = dynamic(() => import('react-spotify-web-playback'), {
@@ -99,6 +100,7 @@ function Recommend() {
   useEffect(() => {
     if (!isLoading && !error && isAuthenticated && !tracksError) {
       setIsReady(true);
+      sleep(1000);
     }
   }, [isLoading, error, isAuthenticated, tracksError]);
 
