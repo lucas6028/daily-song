@@ -55,7 +55,7 @@ function Recommend() {
         .then(res => res.data.body.items),
     { revalidateOnFocus: false }
   );
-  const { tracks, isLoading = false, tracksError } = useRecommendedTracks(artists, minPopularity);
+  const { tracks, isLoading, tracksError } = useRecommendedTracks(artists, minPopularity);
 
   useEffect(() => {
     if (authError) {
