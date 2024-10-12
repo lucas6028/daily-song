@@ -1,7 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
 import { Carousel, Card, Container, Row, Col } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
+import useSWR from 'swr';
 import { Artist, SpotifyArtistResponse, SpotifyTracksResponse, Track } from 'types/types';
 import { useRouter } from 'next/navigation';
 import SpotifyWebPlayer from 'react-spotify-web-playback';
@@ -25,45 +27,33 @@ function Recommend() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
 
+  // SWR
+  const fetcher = (url: string) => axios.get(url, { withCredentials: true }).then(res => res.data);
+  const { data: authData, error: authError } = useSWR('/api/auth', fetcher);
+  const { data: tokenData, error: tokenError } = useSWR('/api/auth/token', fetcher);
+
   useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const response = await axios.get('/api/auth', { withCredentials: true });
+    if (authError) {
+      console.error('Error checking auth status:', authError);
+      router.push('/login');
+    } else if (authData && !authData.authenticated) {
+      router.push('/login');
+    } else if (authData && authData.authenticated) {
+      setIsAuthenticated(true);
+    }
+  }, [authData, authError]);
 
-        if (response.data.authenticated) {
-          // User is authenticated (either access token is valid or refreshed)
-          setIsAuthenticated(true);
-        } else {
-          // No access token, no refresh token, or refresh failed
-          console.log(response.data.message);
-          router.push('/login');
-        }
-      } catch (error) {
-        console.error('Error checking auth status:', error);
-        router.push('/login');
-      }
-    };
-
-    checkAuth();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  useEffect(() => {
+    if (tokenError) {
+      console.error('Error while getting token:', tokenError);
+    } else if (tokenData) {
+      setAccessToken(tokenData.access_token.value);
+    }
+  }, [tokenData, tokenError]);
 
   useEffect(() => {
     setPlay(true);
   }, [uri]);
-
-  useEffect(() => {
-    const fetchToken = async () => {
-      try {
-        const res = await axios.get('/api/auth/token', { withCredentials: true });
-        setAccessToken(res.data.access_token.value);
-      } catch (err) {
-        console.error('Error while get token: ' + err);
-      }
-    };
-
-    fetchToken();
-  }, []);
 
   useEffect(() => {
     if (!access_token) return;
