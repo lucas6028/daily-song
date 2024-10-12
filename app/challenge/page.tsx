@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
 import { useEffect, useState } from 'react';
+import useSWR from 'swr';
 import { useRouter } from 'next/navigation';
 import { Button, Card, Container, Form } from 'react-bootstrap';
 import axios from 'axios';
@@ -29,44 +31,35 @@ function Challenge() {
   const [isFlipped, setIsFlipped] = useState(false);
   const router = useRouter();
 
+  // SWR
+  const fetcher = (url: string) => axios.get(url, { withCredentials: true }).then(res => res.data);
+  const { data: authData, error: authError } = useSWR('/api/auth', fetcher);
+  const { data: tokenData, error: tokenError } = useSWR('/api/auth/token', fetcher);
+
   useEffect(() => {
     setPlay(true);
   }, [uri]);
 
   useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const response = await axios.get('/api/auth', { withCredentials: true });
-
-        if (response.data.authenticated) {
-          // User is authenticated (either access token is valid or refreshed)
-          setIsAuthenticated(true);
-        } else {
-          // No access token, no refresh token, or refresh failed
-          console.log(response.data.message);
-          router.push('/login');
-        }
-      } catch (error) {
-        console.error('Error checking auth status:', error);
-        router.push('/login');
-      }
-    };
-
-    checkAuth();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (authError) {
+      console.error('Error checking auth status:', authError);
+      throw new Error(authError);
+      router.push('/login');
+    } else if (authData && !authData.authenticated) {
+      router.push('/login');
+    } else if (authData && authData.authenticated) {
+      setIsAuthenticated(true);
+    }
+  }, [authData, authError]);
 
   useEffect(() => {
-    const fetchToken = async () => {
-      try {
-        const res = await axios.get('/api/auth/token', { withCredentials: true });
-        setAccessToken(res.data.access_token.value);
-      } catch (err) {
-        console.error('Error while get token: ' + err);
-      }
-    };
-    fetchToken();
-  }, []);
+    if (tokenError) {
+      console.error('Error while getting token:', tokenError);
+      throw new Error(tokenError);
+    } else if (tokenData) {
+      setAccessToken(tokenData.access_token.value);
+    }
+  }, [tokenData, tokenError]);
 
   useEffect(() => {
     const fetchTopArtists = async () => {
