@@ -43,7 +43,6 @@ function Challenge() {
   useEffect(() => {
     if (authError) {
       console.error('Error checking auth status:', authError);
-      throw new Error(authError);
       router.push('/login');
     } else if (authData && !authData.authenticated) {
       router.push('/login');
