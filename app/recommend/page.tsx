@@ -26,6 +26,7 @@ const SpotifyWebPlayer = dynamic(() => import('react-spotify-web-playback'), {
 function Recommend() {
   const minPopularity = 10;
   const LIMIT = 1;
+  const OFFSET = Math.floor(Math.random() * 21);
   const [isReady, setIsReady] = useState<boolean>(false);
   const [uri, setUri] = useState<string>('');
   const [play, setPlay] = useState<boolean>(false);
@@ -41,7 +42,7 @@ function Recommend() {
   const { data: tokenData, error: tokenError } = useSWR('/api/auth/token', fetcher, {
     revalidateOnFocus: false,
   });
-  const { artists, artistsError } = useTopArtist(LIMIT);
+  const { artists, artistsError } = useTopArtist(LIMIT, OFFSET);
   const { tracks, isLoading, tracksError } = useRecommendedTracks(artists, minPopularity);
 
   useEffect(() => {
