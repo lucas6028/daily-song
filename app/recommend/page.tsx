@@ -37,18 +37,25 @@ function Recommend() {
 
   // SWR
   const fetcher = (url: string) => axios.get(url, { withCredentials: true }).then(res => res.data);
-  const { data: authData, error: authError } = useSWR('/api/auth', fetcher, { revalidateOnFocus: false });
-  const { data: tokenData, error: tokenError } = useSWR('/api/auth/token', fetcher, { revalidateOnFocus: false, });
-  const { data: topArtistsData, error: topArtistsError } = useSWR('/api/artist/my-top', (url: string) =>
-    axios.get(url, {
-      params: {
-        limit: 1,
-        offset: Math.floor(Math.random() * 21),
-      },
-      withCredentials: true,
-    },
-    ).then(res => res.data.body.items),
-    { revalidateOnFocus: false, }
+  const { data: authData, error: authError } = useSWR('/api/auth', fetcher, {
+    revalidateOnFocus: false,
+  });
+  const { data: tokenData, error: tokenError } = useSWR('/api/auth/token', fetcher, {
+    revalidateOnFocus: false,
+  });
+  const { data: topArtistsData, error: topArtistsError } = useSWR(
+    '/api/artist/my-top',
+    (url: string) =>
+      axios
+        .get(url, {
+          params: {
+            limit: 1,
+            offset: Math.floor(Math.random() * 21),
+          },
+          withCredentials: true,
+        })
+        .then(res => res.data.body.items),
+    { revalidateOnFocus: false }
   );
   const { tracks, isLoading, tracksError } = useRecommendedTracks(artists, minPopularity);
 
@@ -79,8 +86,7 @@ function Recommend() {
     if (topArtistsError) {
       console.error('Error fetching top artist: ', topArtistsError);
       setError('Failed to fetch top artists');
-    }
-    else if (topArtistsData) {
+    } else if (topArtistsData) {
       const newArtists: Artist[] = topArtistsData.map((art: SpotifyArtistResponse) => ({
         name: art.name,
         id: art.id,
