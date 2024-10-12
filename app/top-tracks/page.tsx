@@ -143,7 +143,7 @@ function TopTrack() {
             styles={spotifyPlayerStyles}
           />
         ) : (
-          <p>No token</p>
+          <></>
         )}
       </div>
       <Footer />

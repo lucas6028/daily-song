@@ -15,24 +15,26 @@ import spotifyPlayerStyles from 'styles/spotifyPlayerStyle';
 import Footer from 'components/Layout/Footer';
 import Loading from './loading';
 import { useRecommendedTracks } from 'hooks/useRecommendTracks';
+import { sleep } from 'lib/sleep';
 
 // Dynamically import SpotifyWebPlayer
 const SpotifyWebPlayer = dynamic(() => import('react-spotify-web-playback'), {
-  ssr: false,
+  ssr: false, // Disable server-side rendering for this component
   loading: () => <div>Loading player...</div>,
 });
 
-export default function Recommend() {
-  const [isReady, setIsReady] = useState(false);
+function Recommend() {
+  const [isReady, setIsReady] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [uri, setUri] = useState('');
-  const [play, setPlay] = useState(false);
+  const [uri, setUri] = useState<string>('');
+  const [play, setPlay] = useState<boolean>(false);
   const [artists, setArtists] = useState<Artist[]>([]);
   const [access_token, setAccessToken] = useState<string | null>(null);
   const minPopularity = 10;
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
 
+  // SWR
   const fetcher = (url: string) => axios.get(url, { withCredentials: true }).then(res => res.data);
   const { data: authData, error: authError } = useSWR('/api/auth', fetcher, {
     revalidateOnFocus: false,
@@ -45,7 +47,10 @@ export default function Recommend() {
     (url: string) =>
       axios
         .get(url, {
-          params: { limit: 1, offset: Math.floor(Math.random() * 21) },
+          params: {
+            limit: 1,
+            offset: Math.floor(Math.random() * 21),
+          },
           withCredentials: true,
         })
         .then(res => res.data.body.items),
@@ -62,7 +67,7 @@ export default function Recommend() {
     } else if (authData && authData.authenticated) {
       setIsAuthenticated(true);
     }
-  }, [authData, authError, router]);
+  }, [authData, authError]);
 
   useEffect(() => {
     if (tokenError) {
@@ -95,21 +100,19 @@ export default function Recommend() {
   useEffect(() => {
     if (!isLoading && !error && isAuthenticated && !tracksError) {
       setIsReady(true);
+      sleep(1000);
     }
   }, [isLoading, error, isAuthenticated, tracksError]);
 
   if (!isReady) {
     return <Loading />;
   }
-
   if (error) {
     throw new Error(error);
   }
-
   if (tracksError) {
     throw new Error(tracksError);
   }
-
   return (
     <>
       <Container className="my-1">
@@ -155,10 +158,12 @@ export default function Recommend() {
             styles={spotifyPlayerStyles}
           />
         ) : (
-          <p>No token!</p>
+          <></>
         )}
       </div>
       <Footer />
     </>
   );
 }
+
+export default Recommend;

@@ -312,7 +312,7 @@ function Challenge() {
             styles={spotifyPlayerStyles}
           />
         ) : (
-          <p>No token</p>
+          <></>
         )}
       </div>
 
