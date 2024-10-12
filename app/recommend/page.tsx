@@ -100,7 +100,6 @@ function Recommend() {
   useEffect(() => {
     if (!isLoading && !error && isAuthenticated && !tracksError) {
       setIsReady(true);
-      sleep(5000);
     }
   }, [isLoading, error, isAuthenticated, tracksError]);
 
