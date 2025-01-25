@@ -1,4 +1,4 @@
-'use-client'
+'use-client';
 
 import 'styles/FixingPage.css'; // Import the CSS file
 
@@ -14,7 +14,7 @@ const FixingPage: FC<FixingPageProps> = ({ messages }) => {
   return (
     <div className="fixing-page-container">
       <div className="cone-container">
-      <Image
+        <Image
           src="/images/traffic-cone-svgrepo-com.svg"
           alt="Daily Song"
           width={237}
@@ -27,7 +27,9 @@ const FixingPage: FC<FixingPageProps> = ({ messages }) => {
           <h3>We are currently fixing something. Please check back later.</h3>
           <ul className="error-message-list">
             {messages.map((message, index) => (
-              <li key={index} className="error-message-item">{message}</li>
+              <li key={index} className="error-message-item">
+                {message}
+              </li>
             ))}
           </ul>
         </div>

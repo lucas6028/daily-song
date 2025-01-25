@@ -15,7 +15,7 @@
 .traffic-cone-image {
   width: 200px;
   height: auto;
-  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
 }
 
 .error-messages-container {
@@ -24,7 +24,7 @@
   border-radius: 12px;
   width: 80%;
   max-width: 500px;
-  box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
   border: 1px solid #e0e0e0;
 }
 
@@ -55,7 +55,7 @@
 
 .error-message-item:hover {
   transform: translateX(10px);
-  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 @keyframes float {
