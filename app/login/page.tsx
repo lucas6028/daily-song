@@ -16,6 +16,7 @@ const Login: React.FC = () => {
     if (existingCode) {
       setUrlCode(existingCode);
     }
+    window.localStorage.clear();
   }, []);
 
   useEffect(() => {
