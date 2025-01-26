@@ -9,7 +9,7 @@ import FixingPage from 'components/Layout/FixingPage';
 function Recommend() {
   const errorMessages = [
     'Service is temporarily unavailable.',
-    'We are working on improving your experience.',
+    'The API endpoint is deprecated by Spotify.',
     'Please try again in a few minutes.',
   ];
   return (
