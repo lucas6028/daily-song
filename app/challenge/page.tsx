@@ -27,7 +27,7 @@ function Challenge() {
   const [tracks, setTracks] = useState<Track[]>([]);
   const [selectedTrack, setSelectedTrack] = useState<string>('');
   const [selectedArtists, setSelectedArtists] = useState<string>('');
-  const [relatedArtists, setRelatedArtists] = useState<Artist[]>([]);
+  // const [relatedArtists, setRelatedArtists] = useState<Artist[]>([]);
   const [isFlipped, setIsFlipped] = useState(false);
   const router = useRouter();
 
@@ -67,7 +67,7 @@ function Challenge() {
       try {
         const res = await axios.get('/api/artist/my-top', {
           params: {
-            limit: 1,
+            limit: 4,
             offset: Math.floor(Math.random() * 51),
           },
           withCredentials: true,
@@ -79,7 +79,7 @@ function Challenge() {
           uri: art.uri,
           imgUrl: art.images[1].url,
         }));
-        setArtists(newArtists);
+        setArtists(shuffleArray(newArtists));
       } catch (err) {
         console.error('Error while fetching top artists: ' + err);
         setError('Failed to fetch top artists');
@@ -89,38 +89,38 @@ function Challenge() {
     fetchTopArtists();
   }, [access_token]);
 
-  useEffect(() => {
-    const fetchRelatedArtists = async () => {
-      if (artists.length === 0) return;
+  // useEffect(() => {
+  //   const fetchRelatedArtists = async () => {
+  //     if (artists.length === 0) return;
 
-      try {
-        const res = await axios.get('/api/artist/related', {
-          params: {
-            id: artists[0].id,
-          },
-          withCredentials: true,
-        });
-        const newRelatedArtists: Artist[] = res.data.body.artists.map(
-          (art: SpotifyArtistResponse) => ({
-            name: art.name,
-            id: art.id,
-            popularity: art.popularity,
-            uri: art.uri,
-            imgUrl: art.images[1].url,
-          })
-        );
-        setRelatedArtists(shuffleArray(newRelatedArtists));
-      } catch (err) {
-        console.error('Error while get related artists: ' + err);
-      }
-    };
+  //     try {
+  //       const res = await axios.get('/api/artist/related', {
+  //         params: {
+  //           id: artists[0].id,
+  //         },
+  //         withCredentials: true,
+  //       });
+  //       const newRelatedArtists: Artist[] = res.data.body.artists.map(
+  //         (art: SpotifyArtistResponse) => ({
+  //           name: art.name,
+  //           id: art.id,
+  //           popularity: art.popularity,
+  //           uri: art.uri,
+  //           imgUrl: art.images[1].url,
+  //         })
+  //       );
+  //       setRelatedArtists(shuffleArray(newRelatedArtists));
+  //     } catch (err) {
+  //       console.error('Error while get related artists: ' + err);
+  //     }
+  //   };
 
-    fetchRelatedArtists();
-  }, [artists]);
+  //   fetchRelatedArtists();
+  // }, [artists]);
 
   useEffect(() => {
     const fetchArtistTopTracks = async () => {
-      if (relatedArtists.length === 0) return;
+      if (artists.length === 0) return;
       const randomIndex = Math.floor(Math.random() * 4);
 
       // console.log('randomIndex:' + randomIndex);
@@ -129,7 +129,7 @@ function Challenge() {
       try {
         const res = await axios.get<SpotifyTracksResponse>('/api/artist/top-tracks', {
           params: {
-            id: relatedArtists[randomIndex].id,
+            id: artists[randomIndex].id,
             market: 'TW',
           },
           withCredentials: true,
@@ -154,7 +154,7 @@ function Challenge() {
     };
 
     fetchArtistTopTracks();
-  }, [relatedArtists]);
+  }, [artists]);
 
   useEffect(() => {
     if (tracks.length === 0) return;
@@ -191,7 +191,7 @@ function Challenge() {
   if (
     !isAuthenticated ||
     artists.length === 0 ||
-    relatedArtists.length === 0 ||
+    // relatedArtists.length === 0 ||
     tracks.length === 0
   ) {
     return <Loading />;
@@ -235,10 +235,10 @@ function Challenge() {
                       <option value="" disabled hidden>
                         Select an artist...
                       </option>
-                      <option value={relatedArtists[0].name}>{relatedArtists[0].name}</option>
-                      <option value={relatedArtists[1].name}>{relatedArtists[1].name}</option>
-                      <option value={relatedArtists[2].name}>{relatedArtists[2].name}</option>
-                      <option value={relatedArtists[3].name}>{relatedArtists[3].name}</option>
+                      <option value={artists[0].name}>{artists[0].name}</option>
+                      <option value={artists[1].name}>{artists[1].name}</option>
+                      <option value={artists[2].name}>{artists[2].name}</option>
+                      <option value={artists[3].name}>{artists[3].name}</option>
                     </Form.Select>
                   </Form.Group>
 
