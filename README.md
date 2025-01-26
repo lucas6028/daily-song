@@ -27,6 +27,45 @@
 - GPT-4o (小助手)
 - Claude (小助手)
 
+## 本地端運行
+
+要在本地端運行這個專案，請按照以下步驟進行：
+
+1. clone 這個 repository：
+    ```sh
+    git clone https://github.com/lucas6028/daily-song.git
+    cd daily-song
+    ```
+
+2. 安裝相依套件：
+    ```sh
+    npm install
+    ```
+
+3. 建立 `.env` 檔案並設定環境變數：
+    ```sh
+    cp .env.example .env
+    ```
+
+    編輯 .env 檔案並填入必要的環境變數
+    ```
+    SECRET_REDIS_PASSWORD=YOUR_REDIS_PASSWORD
+    SECRET_CLIENT_SECRET=YOUR_SPOTIFY_CLIENT_SECRET
+    NEXT_PUBLIC_CLIENT_ID=YOUR_SPOTIFY_PUBLIC_SECRET
+    NEXT_PUBLIC_NODE_ENV=development
+    NEXT_PUBLIC_REDIRECT_URL=https://localhost:3000/login
+    NEXT_PUBLIC_API_URL=https://localhost:3000/
+    ```
+    Spotify client id 和 secret 可在 Spofity Developer 網站註冊
+    Website: [https://developer.spotify.com/](https://developer.spotify.com/)
+
+4. 啟動開發伺服器：
+    ```sh
+    npm run dev
+    ```
+
+5. 在瀏覽器中開啟 [http://localhost:3000](http://localhost:3000) 查看網站。
+
 ## 心得
 
 當初是為了學習網頁API的原理以及運作方式，看到有人推薦 Spotify-API，所以就上網找 Docs 來看。最一開始是做 SPA (Single-page-application)，單純的讓使用者登入 Spotify 帳號並使用 iFrame embembed，並沒有做 OAuth 和儲存 access token。
