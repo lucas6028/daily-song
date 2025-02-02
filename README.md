@@ -32,37 +32,43 @@
 要在本地端運行這個專案，請按照以下步驟進行：
 
 1. clone 這個 repository：
-    ```sh
-    git clone https://github.com/lucas6028/daily-song.git
-    cd daily-song
-    ```
+
+   ```sh
+   git clone https://github.com/lucas6028/daily-song.git
+   cd daily-song
+   ```
 
 2. 安裝相依套件：
-    ```sh
-    npm install
-    ```
+
+   ```sh
+   npm install
+   ```
 
 3. 建立 `.env` 檔案並設定環境變數：
-    ```sh
-    cp .env.example .env
-    ```
 
-    編輯 .env 檔案並填入必要的環境變數
-    ```
-    SECRET_REDIS_PASSWORD=YOUR_REDIS_PASSWORD
-    SECRET_CLIENT_SECRET=YOUR_SPOTIFY_CLIENT_SECRET
-    NEXT_PUBLIC_CLIENT_ID=YOUR_SPOTIFY_PUBLIC_SECRET
-    NEXT_PUBLIC_NODE_ENV=development
-    NEXT_PUBLIC_REDIRECT_URL=https://localhost:3000/login
-    NEXT_PUBLIC_API_URL=https://localhost:3000/
-    ```
-    Spotify client id 和 secret 可在 Spofity Developer 網站註冊
-    Website: [https://developer.spotify.com/](https://developer.spotify.com/)
+   ```sh
+   cp .env.example .env
+   ```
+
+   編輯 .env 檔案並填入必要的環境變數
+
+   ```
+   SECRET_REDIS_PASSWORD=YOUR_REDIS_PASSWORD
+   SECRET_CLIENT_SECRET=YOUR_SPOTIFY_CLIENT_SECRET
+   NEXT_PUBLIC_CLIENT_ID=YOUR_SPOTIFY_PUBLIC_SECRET
+   NEXT_PUBLIC_NODE_ENV=development
+   NEXT_PUBLIC_REDIRECT_URL=https://localhost:3000/login
+   NEXT_PUBLIC_API_URL=https://localhost:3000/
+   ```
+
+   Spotify client id 和 secret 可在 Spofity Developer 網站註冊
+   Website: [https://developer.spotify.com/](https://developer.spotify.com/)
 
 4. 啟動開發伺服器：
-    ```sh
-    npm run dev
-    ```
+
+   ```sh
+   npm run dev
+   ```
 
 5. 在瀏覽器中開啟 [http://localhost:3000](http://localhost:3000) 查看網站。
 
