@@ -13,7 +13,7 @@ export function useRecommendedTracks(artists: Artist[], minPopularity: number) {
       ? [
           '/api/track/recommend',
           {
-            limit: 10,
+            limit: 5,
             seed_artists: artists[0].name,
             min_popularity: minPopularity,
           },
