@@ -1,11 +1,11 @@
 import useSWR from 'swr';
 import axios from 'axios';
-import type { Artist, SpotifyTracksResponse, Track } from 'types/types';
+import type { Artist, RecommendTrack, Track } from 'types/types';
 
 const fetcher = (
   url: string,
   params: { limit: number; seed_artists: string; min_popularity: number }
-) => axios.get<SpotifyTracksResponse>(url, { params, withCredentials: true }).then(res => res.data);
+) => axios.get(url, { params, withCredentials: true }).then(res => res.data);
 
 export function useRecommendedTracks(artists: Artist[], minPopularity: number) {
   const { data, error, isLoading } = useSWR(
@@ -14,7 +14,7 @@ export function useRecommendedTracks(artists: Artist[], minPopularity: number) {
           '/api/track/recommend',
           {
             limit: 10,
-            seed_artists: artists[0].id,
+            seed_artists: artists[0].name,
             min_popularity: minPopularity,
           },
         ]
@@ -27,16 +27,12 @@ export function useRecommendedTracks(artists: Artist[], minPopularity: number) {
     }
   );
 
-  const tracks: Track[] =
-    data?.body.tracks.map(track => ({
-      albumName: track.album.name,
-      albumUri: track.album.uri,
-      artist: track.artists[0].name,
-      artistUri: track.artists[0].uri,
-      title: track.name,
-      id: track.id,
-      trackUri: track.uri,
-      img: track.album.images[1].url,
+  const tracks: RecommendTrack[] =
+    data?.map((track: RecommendTrack) => ({
+      artist_name: track.artist_name,
+      title: track.title,
+      track_uri: track.track_uri,
+      img_url: track.img_url,
     })) || [];
 
   return {
