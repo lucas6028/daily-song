@@ -1,13 +1,10 @@
-import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from '@google/generative-ai';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
 
   const seed_artists = searchParams.get('seed_artists')?.split(',') || ['Taylor Swift'];
-  const seed_genres = searchParams.get('seed_genres')?.split(',') || [];
-  const seed_tracks = searchParams.get('seed_tracks')?.split(',') || [];
-  const min_popularity = parseInt(searchParams.get('min_popularity') || '0', 10);
   const limit = parseInt(searchParams.get('limit') || '20', 10);
 
   const genAI = new GoogleGenerativeAI(process.env.SECRET_GEMINI_API_KEY || '');
