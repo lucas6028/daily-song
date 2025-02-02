@@ -110,3 +110,10 @@ interface SpotifyArtistResponse {
   uri: string;
   images: Image[];
 }
+
+export interface RecommendTrack {
+  artist_name: string;
+  title: string;
+  track_uri: string;
+  img_url: string;
+}
