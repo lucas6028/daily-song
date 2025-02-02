@@ -13,6 +13,7 @@
     "check": "npm run check-format && npm run lint"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.21.0",
     "@next/third-parties": "^14.2.14",
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
