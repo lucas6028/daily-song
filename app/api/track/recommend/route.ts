@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
         seed_artists +
         ',\nlimit=' +
         limit +
-        '\n. **Output Format**:\nYour output should be a JSON array of tracks, adhering to the structure described above.\n: '
+        ''
     );
     const data = JSON.parse(result.response.text().slice(7, -4));
     console.log(data);
