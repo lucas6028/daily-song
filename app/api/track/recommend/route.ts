@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import axios from 'axios';
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -10,7 +9,7 @@ export async function GET(request: NextRequest) {
   const autoCorrect = searchParams.get('autocorrect') || '0';
   const API_KEY = process.env.SECRET_LASTFM_API_KEY;
 
-  const url = `https://ws.audioscrobbler.com/2.0/?method=track.getsimilar&artist=${encodeURIComponent(artist)}&track=${encodeURIComponent(track)}&limit=${limit}&api_key=${API_KEY}&format=json`;
+  const url = `https://ws.audioscrobbler.com/2.0/?method=track.getsimilar&artist=${encodeURIComponent(artist)}&track=${encodeURIComponent(track)}&limit=${limit}&autocorrect=${autoCorrect}&api_key=${API_KEY}&format=json`;
 
   try {
     const response = await fetch(url);
