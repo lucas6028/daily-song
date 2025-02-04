@@ -1,21 +1,19 @@
 import useSWR from 'swr';
 import axios from 'axios';
-import type { Artist, RecommendTrack, Track } from 'types/types';
+import { LastfmRecommendTrack, Track } from 'types/types';
 
-const fetcher = (
-  url: string,
-  params: { limit: number; seed_artists: string; min_popularity: number }
-) => axios.get(url, { params, withCredentials: true }).then(res => res.data);
+const fetcher = (url: string, params: { limit: number; seed_artist: string; seed_track: string }) =>
+  axios.get(url, { params, withCredentials: true }).then(res => res.data);
 
-export function useRecommendedTracks(artists: Artist[], minPopularity: number) {
+export function useRecommendedTracks(track: string, artist: string, limit = 10) {
   const { data, error, isLoading } = useSWR(
-    artists.length > 0
+    track && artist
       ? [
           '/api/track/recommend',
           {
-            limit: 5,
-            seed_artists: artists[0].name,
-            min_popularity: minPopularity,
+            limit: limit,
+            seed_track: track,
+            seed_artist: artist,
           },
         ]
       : null,
@@ -27,12 +25,22 @@ export function useRecommendedTracks(artists: Artist[], minPopularity: number) {
     }
   );
 
-  const tracks: RecommendTrack[] =
-    data?.map((track: RecommendTrack) => ({
-      artist_name: track.artist_name,
-      title: track.title,
-      track_uri: track.track_uri,
-      img_url: track.img_url,
+  if (!track || !artist) {
+    return {
+      tracks: [],
+      isLoading: true,
+      tracksError: 'Please select a track and an artist',
+    };
+  }
+
+  const tracks: Track[] =
+    data?.similartracks.track.map((track: LastfmRecommendTrack) => ({
+      artist: track.artist.name,
+      artistUri: track.artist.url,
+      title: track.name,
+      trackUri: track.url,
+      img: track.image[3]['#text'],
+      id: track.mbid,
     })) || [];
 
   return {
