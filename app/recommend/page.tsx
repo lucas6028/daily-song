@@ -16,16 +16,10 @@ import Loading from './loading';
 import { useRecommendedTracks } from 'hooks/useRecommendTracks';
 import { sleep } from 'lib/sleep';
 import { useTopArtist } from 'hooks/useTopArtist';
-
-// Dynamically import SpotifyWebPlayer
-const SpotifyWebPlayer = dynamic(() => import('react-spotify-web-playback'), {
-  ssr: false, // Disable server-side rendering for this component
-  loading: () => <div>Loading player...</div>,
-});
+import { Track } from 'types/types';
 
 function Recommend() {
-  const minPopularity = 10;
-  const LIMIT = 1;
+  const LIMIT = 10;
   const OFFSET = Math.floor(Math.random() * 21);
   const [isReady, setIsReady] = useState<boolean>(false);
   const [uri, setUri] = useState<string>('');
@@ -42,8 +36,21 @@ function Recommend() {
   const { data: tokenData, error: tokenError } = useSWR('/api/auth/token', fetcher, {
     revalidateOnFocus: false,
   });
-  const { artists, artistsError } = useTopArtist(LIMIT, OFFSET);
-  const { tracks, isLoading, tracksError } = useRecommendedTracks(artists, minPopularity);
+  const { data: topTracksData, error: topTracksError } = useSWR(
+    '/api/track/my-top',
+    (url: string) =>
+      axios
+        .get(url, {
+          params: { limit: 1 },
+          withCredentials: true,
+        })
+        .then(res => res.data.body.items)
+  );
+  const { tracks, isLoading, tracksError } = useRecommendedTracks(
+    topTracksData?.[0]?.name || '',
+    topTracksData?.[0]?.artists[0].name || '',
+    LIMIT
+  );
 
   useEffect(() => {
     if (authError) {
@@ -65,21 +72,17 @@ function Recommend() {
   }, [tokenData, tokenError]);
 
   useEffect(() => {
-    setPlay(true);
-  }, [uri]);
-
-  useEffect(() => {
-    if (!isLoading && !artistsError && isAuthenticated && !tracksError) {
+    if (!isLoading && !topTracksError && isAuthenticated && !tracksError) {
       setIsReady(true);
       sleep(1000);
     }
-  }, [isLoading, artistsError, isAuthenticated, tracksError]);
+  }, [isLoading, topTracksError, isAuthenticated, tracksError]);
 
   if (!isReady) {
     return <Loading />;
   }
-  if (artistsError) {
-    throw new Error(artistsError);
+  if (topTracksError) {
+    throw new Error(topTracksError);
   }
   if (tracksError) {
     throw new Error(tracksError);
@@ -90,21 +93,21 @@ function Recommend() {
         <NavBar />
         <Carousel>
           {tracks.map(track => (
-            <Carousel.Item key={track.track_uri}>
+            <Carousel.Item key={track.title}>
               <Row className="justify-content-center">
                 <Col xs={12} md={6} lg={4}>
                   <Card className={`bg-gradient text-dark ${styles.card}`}>
                     <Card.Img
                       variant="top"
-                      src={track.img_url}
+                      src={track.img}
                       width={300}
                       height={300}
                       style={{ objectFit: 'contain' }}
                     />
                     <Card.Body className="d-flex flex-column align-items-center">
                       <Card.Title className={styles.text}>{track.title}</Card.Title>
-                      <Card.Text className={styles.text}>{track.artist_name}</Card.Text>
-                      <PlayButton onClick={() => setUri(track.track_uri)} />
+                      <Card.Text className={styles.text}>{track.artist}</Card.Text>
+                      <PlayButton onClick={() => setUri(track.trackUri)} />
                     </Card.Body>
                   </Card>
                 </Col>
@@ -113,26 +116,9 @@ function Recommend() {
           ))}
         </Carousel>
       </Container>
-      <div className={styles.playerContainer}>
-        {access_token ? (
-          <SpotifyWebPlayer
-            callback={state => {
-              if (!state.isPlaying) {
-                setPlay(false);
-              }
-            }}
-            showSaveIcon
-            play={play}
-            token={access_token}
-            uris={[uri]}
-            initialVolume={50}
-            styles={spotifyPlayerStyles}
-          />
-        ) : (
-          <></>
-        )}
+      <div style={{ position: 'fixed', bottom: 0, width: '100%' }}>
+        <Footer />
       </div>
-      <Footer />
     </>
   );
 }
