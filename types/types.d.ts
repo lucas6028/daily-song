@@ -111,9 +111,25 @@ interface SpotifyArtistResponse {
   images: Image[];
 }
 
-export interface RecommendTrack {
-  artist_name: string;
-  title: string;
-  track_uri: string;
-  img_url: string;
+export interface LastfmArtist {
+  name: string;
+  mbid: string;
+  url: string;
+  image: Image[];
+}
+
+export interface LastfmImage {
+  '#text': string;
+  size: string;
+}
+
+export interface LastfmRecommendTrack {
+  artist: LastfmArtist;
+  duraction: number;
+  image: LastfmImage[];
+  match: number;
+  mbid: string;
+  name: string;
+  playcount: number;
+  url: string;
 }
