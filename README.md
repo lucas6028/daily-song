@@ -59,10 +59,14 @@
    NEXT_PUBLIC_NODE_ENV=development
    NEXT_PUBLIC_REDIRECT_URL=https://localhost:3000/login
    NEXT_PUBLIC_API_URL=https://localhost:3000/
+   SECRET_LASTFM_API_KEY=YOUR_LASTFM_API_KEY
    ```
 
    Spotify client id 和 secret 可在 Spofity Developer 網站註冊
-   Website: [https://developer.spotify.com/](https://developer.spotify.com/)
+   Website: [Spotify Developer](https://developer.spotify.com/)
+
+   Last.FM API 可在官網註冊
+   Website: [Last.FM](https://www.last.fm/api#getting-started)
 
 4. 啟動開發伺服器：
 
