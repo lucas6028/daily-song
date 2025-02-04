@@ -4,27 +4,23 @@
 import { Carousel, Card, Container, Row, Col } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
-import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import PlayButton from 'components/UI/PlayButton';
 import NavBar from 'components/Layout/Navbar';
 import axios from 'axios';
 import styles from 'styles/DailySong.module.css';
-import spotifyPlayerStyles from 'styles/spotifyPlayerStyle';
 import Footer from 'components/Layout/Footer';
 import Loading from './loading';
 import { useRecommendedTracks } from 'hooks/useRecommendTracks';
 import { sleep } from 'lib/sleep';
-import { useTopArtist } from 'hooks/useTopArtist';
-import { Track } from 'types/types';
 
 function Recommend() {
   const LIMIT = 10;
-  const OFFSET = Math.floor(Math.random() * 21);
+  // const OFFSET = Math.floor(Math.random() * 21);
   const [isReady, setIsReady] = useState<boolean>(false);
-  const [uri, setUri] = useState<string>('');
-  const [play, setPlay] = useState<boolean>(false);
-  const [access_token, setAccessToken] = useState<string | null>(null);
+  // const [uri, setUri] = useState<string>('');
+  // const [play, setPlay] = useState<boolean>(false);
+  // const [access_token, setAccessToken] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
 
@@ -33,9 +29,9 @@ function Recommend() {
   const { data: authData, error: authError } = useSWR('/api/auth', fetcher, {
     revalidateOnFocus: false,
   });
-  const { data: tokenData, error: tokenError } = useSWR('/api/auth/token', fetcher, {
-    revalidateOnFocus: false,
-  });
+  // const { data: tokenData, error: tokenError } = useSWR('/api/auth/token', fetcher, {
+  //   revalidateOnFocus: false,
+  // });
   const { data: topTracksData, error: topTracksError } = useSWR(
     '/api/track/my-top',
     (url: string) =>
@@ -63,13 +59,13 @@ function Recommend() {
     }
   }, [authData, authError]);
 
-  useEffect(() => {
-    if (tokenError) {
-      console.error('Error while getting token:', tokenError);
-    } else if (tokenData) {
-      setAccessToken(tokenData.access_token.value);
-    }
-  }, [tokenData, tokenError]);
+  // useEffect(() => {
+  //   if (tokenError) {
+  //     console.error('Error while getting token:', tokenError);
+  //   } else if (tokenData) {
+  //     setAccessToken(tokenData.access_token.value);
+  //   }
+  // }, [tokenData, tokenError]);
 
   useEffect(() => {
     if (!isLoading && !topTracksError && isAuthenticated && !tracksError) {
@@ -107,7 +103,7 @@ function Recommend() {
                     <Card.Body className="d-flex flex-column align-items-center">
                       <Card.Title className={styles.text}>{track.title}</Card.Title>
                       <Card.Text className={styles.text}>{track.artist}</Card.Text>
-                      <PlayButton onClick={() => setUri(track.trackUri)} />
+                      <PlayButton onClick={() => (window.location.href = `${track.trackUri}`)} />
                     </Card.Body>
                   </Card>
                 </Col>
