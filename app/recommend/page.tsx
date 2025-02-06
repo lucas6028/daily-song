@@ -13,10 +13,11 @@ import Footer from 'components/Layout/Footer';
 import Loading from './loading';
 import { useRecommendedTracks } from 'hooks/useRecommendTracks';
 import { sleep } from 'lib/sleep';
+import FixingPage from 'components/Layout/FixingPage';
 
 function Recommend() {
   const LIMIT = 10;
-  // const OFFSET = Math.floor(Math.random() * 21);
+  const OFFSET = Math.floor(Math.random() * 21);
   const [isReady, setIsReady] = useState<boolean>(false);
   // const [uri, setUri] = useState<string>('');
   // const [play, setPlay] = useState<boolean>(false);
@@ -37,7 +38,7 @@ function Recommend() {
     (url: string) =>
       axios
         .get(url, {
-          params: { limit: 1 },
+          params: { limit: 1, offset: OFFSET },
           withCredentials: true,
         })
         .then(res => res.data.body.items)
@@ -83,6 +84,23 @@ function Recommend() {
   if (tracksError) {
     throw new Error(tracksError);
   }
+  if (tracks.length === 0) {
+    return (
+      <>
+        <NavBar />
+        <FixingPage
+          messages={[
+            'The tracks length is 0',
+            'Please reload the page.',
+            `seed_track: ${topTracksData?.[0]?.name}`,
+            `seed_artist: ${topTracksData?.[0]?.artists[0].name}`,
+          ]}
+        />
+        ;
+      </>
+    );
+  }
+
   return (
     <>
       <Container className="my-1">
@@ -112,9 +130,7 @@ function Recommend() {
           ))}
         </Carousel>
       </Container>
-      <div style={{ position: 'fixed', bottom: 0, width: '100%' }}>
-        <Footer />
-      </div>
+      <Footer />
     </>
   );
 }
