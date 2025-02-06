@@ -34,7 +34,7 @@ export function useRecommendedTracks(track: string, artist: string, limit = 10) 
   }
 
   const tracks: Track[] =
-    data?.similartracks.track.map((track: LastfmRecommendTrack) => ({
+    data?.tracks.map((track: LastfmRecommendTrack) => ({
       artist: track.artist.name,
       artistUri: track.artist.url,
       title: track.name,

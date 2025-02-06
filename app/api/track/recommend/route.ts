@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
     const data = await response.json();
     console.log('similar track: ');
 
-    return NextResponse.json({ similartracks: data.similartracks, status: 200 });
+    return NextResponse.json({ tracks: data.similartracks.track, status: 200 });
   } catch (err) {
     console.error('Error while get recommend tracks: ' + err);
     return NextResponse.json({ message: err, status: 401 });
