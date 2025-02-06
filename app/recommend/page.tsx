@@ -12,16 +12,13 @@ import styles from 'styles/DailySong.module.css';
 import Footer from 'components/Layout/Footer';
 import Loading from './loading';
 import { useRecommendedTracks } from 'hooks/useRecommendTracks';
+import { useTopChartTracks } from 'hooks/useTopChartTracks';
 import { sleep } from 'lib/sleep';
-import FixingPage from 'components/Layout/FixingPage';
 
 function Recommend() {
   const LIMIT = 10;
   const OFFSET = Math.floor(Math.random() * 21);
   const [isReady, setIsReady] = useState<boolean>(false);
-  // const [uri, setUri] = useState<string>('');
-  // const [play, setPlay] = useState<boolean>(false);
-  // const [access_token, setAccessToken] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
 
@@ -30,9 +27,6 @@ function Recommend() {
   const { data: authData, error: authError } = useSWR('/api/auth', fetcher, {
     revalidateOnFocus: false,
   });
-  // const { data: tokenData, error: tokenError } = useSWR('/api/auth/token', fetcher, {
-  //   revalidateOnFocus: false,
-  // });
   const { data: topTracksData, error: topTracksError } = useSWR(
     '/api/track/my-top',
     (url: string) =>
@@ -48,6 +42,7 @@ function Recommend() {
     topTracksData?.[0]?.artists[0].name || '',
     LIMIT
   );
+  const { chartTracks, chartTracksError } = useTopChartTracks(1, 10);
 
   useEffect(() => {
     if (authError) {
@@ -59,14 +54,6 @@ function Recommend() {
       setIsAuthenticated(true);
     }
   }, [authData, authError]);
-
-  // useEffect(() => {
-  //   if (tokenError) {
-  //     console.error('Error while getting token:', tokenError);
-  //   } else if (tokenData) {
-  //     setAccessToken(tokenData.access_token.value);
-  //   }
-  // }, [tokenData, tokenError]);
 
   useEffect(() => {
     if (!isLoading && !topTracksError && isAuthenticated && !tracksError) {
@@ -84,21 +71,8 @@ function Recommend() {
   if (tracksError) {
     throw new Error(tracksError);
   }
-  if (tracks.length === 0) {
-    return (
-      <>
-        <NavBar />
-        <FixingPage
-          messages={[
-            'The tracks length is 0',
-            'Please reload the page.',
-            `seed_track: ${topTracksData?.[0]?.name}`,
-            `seed_artist: ${topTracksData?.[0]?.artists[0].name}`,
-          ]}
-        />
-        ;
-      </>
-    );
+  if (chartTracksError) {
+    throw new Error(chartTracksError);
   }
 
   return (
@@ -106,7 +80,7 @@ function Recommend() {
       <Container className="my-1">
         <NavBar />
         <Carousel>
-          {tracks.map(track => (
+          {(tracks.length > 0 ? tracks : chartTracks).map(track => (
             <Carousel.Item key={track.title}>
               <Row className="justify-content-center">
                 <Col xs={12} md={6} lg={4}>
