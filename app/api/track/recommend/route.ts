@@ -14,7 +14,6 @@ export async function GET(request: NextRequest) {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    console.log('similar track: ');
 
     return NextResponse.json({ tracks: data.similartracks.track, status: 200 });
   } catch (err) {
