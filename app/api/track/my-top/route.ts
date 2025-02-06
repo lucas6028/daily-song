@@ -6,6 +6,8 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const limitParam = searchParams.get('limit');
     const limit = limitParam ? parseInt(limitParam, 10) : 10;
+    const offsetParam = searchParams.get('offset');
+    const offset = offsetParam ? parseInt(offsetParam, 10) : 0;
     const accessToken = request.cookies.get('access_token')?.value;
 
     if (!accessToken) {
@@ -19,7 +21,7 @@ export async function GET(request: NextRequest) {
     }
 
     spotifyAPI.setAccessToken(accessToken);
-    const data = await spotifyAPI.getMyTopTracks({ limit: limit });
+    const data = await spotifyAPI.getMyTopTracks({ limit: limit, offset: offset });
     return NextResponse.json(data);
   } catch (err) {
     console.error('Error while getting my top tracks: ', err);
