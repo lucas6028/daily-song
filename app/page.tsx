@@ -25,6 +25,7 @@ const Home: React.FC = () => {
       <Zoom triggerOnce>
         <p className={styles.text}>Display top tracks, recommend tracks, and daily challenge</p>
       </Zoom>
+      <p> </p>
       <Footer />
     </div>
   );
