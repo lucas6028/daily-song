@@ -1,4 +1,8 @@
+# Daily Song
+
 ## 網站介紹
+
+Display top tracks, recommend tracks, and daily challenge. Listen to music we recommend to you.
 
 這是一個提供使用者聆聽歌曲的網站，主要分為三個部分
 
@@ -6,7 +10,12 @@
 2. **Recommend**: 根據您聆聽的喜好，推薦10首專屬於你的歌曲
 3. **Challenge**: 提供多道題目讓您藉由猜歌曲名字與歌手認識更多的音樂
 
+## 預覽
+
+### 首頁
 ![alt text](https://github.com/lucas6028/daily-song/blob/main/public/images/homepage_screenshot.png)
+
+## 儀錶板
 ![alt text](https://github.com/lucas6028/daily-song/blob/main/public/images/dashboard_screenshot.png)
 
 ## 技術
