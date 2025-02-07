@@ -6,6 +6,9 @@
 2. **Recommend**: 根據您聆聽的喜好，推薦10首專屬於你的歌曲
 3. **Challenge**: 提供多道題目讓您藉由猜歌曲名字與歌手認識更多的音樂
 
+![alt text](https://github.com/lucas6028/daily-song/tree/main/public/images/homepage_screenshot.png)
+![alt text](https://github.com/lucas6028/daily-song/tree/main/public/images/dashboard_screeenshot.png)
+
 ## 技術
 
 目前網站使用的技術與框架
