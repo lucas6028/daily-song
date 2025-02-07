@@ -16,9 +16,13 @@ Display top tracks, recommend tracks, and daily challenge. Listen to music we re
 
 ![alt text](https://github.com/lucas6028/daily-song/blob/main/public/images/homepage_screenshot.png)
 
-### 儀錶板
+### Dashboard
 
 ![alt text](https://github.com/lucas6028/daily-song/blob/main/public/images/dashboard_screenshot.png)
+
+### Top Tracks
+
+![alt text](https://github.com/lucas6028/daily-song/blob/main/public/images/toptracks_screenshot.png)
 
 ## 技術
 
