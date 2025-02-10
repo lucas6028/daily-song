@@ -1,19 +1,22 @@
 import useSWR from 'swr';
 import axios from 'axios';
-import { LastfmRecommendTrack, Track } from 'types/types';
+import { KKBOXTrack, Track } from 'types/types';
 
-const fetcher = (url: string, params: { limit: number; seed_artist: string; seed_track: string }) =>
-  axios.get(url, { params, withCredentials: true }).then(res => res.data);
+const fetcher = (
+  url: string,
+  params: { limit: number; track_id: string; offset: number; territory: string }
+) => axios.get(url, { params, withCredentials: true }).then(res => res.data);
 
-export function useRecommendedTracks(track: string, artist: string, limit = 10) {
+export function useRecommendedTracks(trackId: string, territory: string, limit = 10, offset = 0) {
   const { data, error, isLoading } = useSWR(
-    track && artist
+    trackId
       ? [
           '/api/track/recommend',
           {
+            track_id: trackId,
+            territory: territory,
             limit: limit,
-            seed_track: track,
-            seed_artist: artist,
+            offset: offset,
           },
         ]
       : null,
@@ -25,7 +28,7 @@ export function useRecommendedTracks(track: string, artist: string, limit = 10) 
     }
   );
 
-  if (!track || !artist) {
+  if (!trackId) {
     return {
       tracks: [],
       isLoading: true,
@@ -34,13 +37,13 @@ export function useRecommendedTracks(track: string, artist: string, limit = 10) 
   }
 
   const tracks: Track[] =
-    data?.tracks.map((track: LastfmRecommendTrack) => ({
-      artist: track.artist.name,
-      artistUri: track.artist.url,
+    data?.tracks.map((track: KKBOXTrack) => ({
+      artist: track.album.artist.name,
+      artistUri: track.album.artist.url,
       title: track.name,
       trackUri: track.url,
-      img: track.image[3]['#text'],
-      id: track.mbid,
+      img: track.album.images[1].url,
+      id: track.id,
     })) || [];
 
   return {
