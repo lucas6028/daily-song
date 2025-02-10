@@ -133,3 +133,36 @@ export interface LastfmRecommendTrack {
   playcount: number;
   url: string;
 }
+
+export interface KKBOXTrack {
+  id: string;
+  name: string;
+  duration: number;
+  url: string;
+  track_number: number;
+  explicitness: boolean;
+  album: KKBOXAlbum;
+}
+
+interface KKBOXAlbum {
+  id: string;
+  name: string;
+  url: string;
+  explicitness: boolean;
+  replease_date: string;
+  images: KKBOXImage[];
+  artist: KKBOXArtist;
+}
+
+interface KKBOXImag {
+  height: number;
+  width: number;
+  url: string;
+}
+
+interface KKBOXArtist {
+  id: string;
+  name: string;
+  url: string;
+  images: KKBOXImage[];
+}
