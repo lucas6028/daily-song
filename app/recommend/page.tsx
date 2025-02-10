@@ -12,7 +12,6 @@ import styles from 'styles/DailySong.module.css';
 import Footer from 'components/Layout/Footer';
 import Loading from './loading';
 import { useRecommendedTracks } from 'hooks/useRecommendTracks';
-import { useTopChartTracks } from 'hooks/useTopChartTracks';
 import { sleep } from 'lib/sleep';
 
 function Recommend() {
@@ -38,11 +37,11 @@ function Recommend() {
         .then(res => res.data.body.items)
   );
   const { tracks, isLoading, tracksError } = useRecommendedTracks(
-    topTracksData?.[0]?.name || '',
-    topTracksData?.[0]?.artists[0].name || '',
-    LIMIT
+    'Paz8PyxaWKr82o2PlV',
+    'TW',
+    LIMIT,
+    OFFSET
   );
-  const { chartTracks, chartTracksError } = useTopChartTracks(1, 10);
 
   useEffect(() => {
     if (authError) {
@@ -71,16 +70,13 @@ function Recommend() {
   if (tracksError) {
     throw new Error(tracksError);
   }
-  if (chartTracksError) {
-    throw new Error(chartTracksError);
-  }
 
   return (
     <>
       <Container className="my-1">
         <NavBar />
         <Carousel>
-          {(tracks.length > 0 ? tracks : chartTracks).map(track => (
+          {tracks.map(track => (
             <Carousel.Item key={track.title}>
               <Row className="justify-content-center">
                 <Col xs={12} md={6} lg={4}>
