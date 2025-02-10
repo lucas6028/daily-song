@@ -26,16 +26,6 @@ function Recommend() {
   const { data: authData, error: authError } = useSWR('/api/auth', fetcher, {
     revalidateOnFocus: false,
   });
-  const { data: topTracksData, error: topTracksError } = useSWR(
-    '/api/track/my-top',
-    (url: string) =>
-      axios
-        .get(url, {
-          params: { limit: 1, offset: OFFSET },
-          withCredentials: true,
-        })
-        .then(res => res.data.body.items)
-  );
   const { tracks, isLoading, tracksError } = useRecommendedTracks(
     'Paz8PyxaWKr82o2PlV',
     'TW',
