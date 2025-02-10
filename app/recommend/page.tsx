@@ -45,17 +45,14 @@ function Recommend() {
   }, [authData, authError]);
 
   useEffect(() => {
-    if (!isLoading && !topTracksError && isAuthenticated && !tracksError) {
+    if (!isLoading && isAuthenticated && !tracksError) {
       setIsReady(true);
       sleep(1000);
     }
-  }, [isLoading, topTracksError, isAuthenticated, tracksError]);
+  }, [isLoading, isAuthenticated, tracksError]);
 
   if (!isReady) {
     return <Loading />;
-  }
-  if (topTracksError) {
-    throw new Error(topTracksError);
   }
   if (tracksError) {
     throw new Error(tracksError);
