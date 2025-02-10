@@ -1,6 +1,6 @@
 async function getAccessToken() {
   const clientID = process.env.NEXT_PUBLIC_KKBOX_CLIENT_ID;
-  const clientSecret = process.env.NEXT_PUBLIC_KKBOX_CLIENT_SECRET;
+  const clientSecret = process.env.SECRET_KKBOX_CLIENT_SECRET;
 
   // Token should be stored securely (e.g., in a database) and refreshed periodically
   // This example shows a basic fetch - you'll likely need to implement proper token management
