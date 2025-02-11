@@ -32,6 +32,7 @@ Display top tracks, recommend tracks, and daily challenge. Listen to music we re
 - **TypeScript** (Language)
 - **Vercel** (架設網站 PaSS)
 - **Spotify Web API** (API)
+- **KKBOX OpenAPI** (API)
 - **OAuth 2.0** (Spotify Login)
 - Axios (API串接、前後端溝通)
 - Bootstrap (CSS Styling)
