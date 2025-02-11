@@ -115,7 +115,7 @@ export interface LastfmArtist {
   name: string;
   mbid: string;
   url: string;
-  image: Image[];
+  image: LastfmImage[];
 }
 
 export interface LastfmImage {
