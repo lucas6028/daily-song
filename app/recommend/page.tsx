@@ -47,34 +47,36 @@ function Recommend() {
   }
 
   return (
-    <Container className="my-1">
-      <NavBar />
-      <Carousel>
-        {tracks.map(track => (
-          <Carousel.Item key={track.title}>
-            <Row className="justify-content-center">
-              <Col xs={12} md={6} lg={4}>
-                <Card className={`bg-gradient text-dark ${styles.card}`}>
-                  <Card.Img
-                    variant="top"
-                    src={track.img}
-                    width={300}
-                    height={300}
-                    style={{ objectFit: 'contain' }}
-                  />
-                  <Card.Body className="d-flex flex-column align-items-center">
-                    <Card.Title className={styles.text}>{track.title}</Card.Title>
-                    <Card.Text className={styles.text}>{track.artist}</Card.Text>
-                    <PlayButton onClick={() => (window.location.href = `${track.trackUri}`)} />
-                  </Card.Body>
-                </Card>
-              </Col>
-            </Row>
-          </Carousel.Item>
-        ))}
-      </Carousel>
+    <>
+      <Container className="my-1">
+        <NavBar />
+        <Carousel>
+          {tracks.map(track => (
+            <Carousel.Item key={track.title}>
+              <Row className="justify-content-center">
+                <Col xs={12} md={6} lg={4}>
+                  <Card className={`bg-gradient text-dark ${styles.card}`}>
+                    <Card.Img
+                      variant="top"
+                      src={track.img}
+                      width={300}
+                      height={300}
+                      style={{ objectFit: 'contain' }}
+                    />
+                    <Card.Body className="d-flex flex-column align-items-center">
+                      <Card.Title className={styles.text}>{track.title}</Card.Title>
+                      <Card.Text className={styles.text}>{track.artist}</Card.Text>
+                      <PlayButton onClick={() => (window.location.href = `${track.trackUri}`)} />
+                    </Card.Body>
+                  </Card>
+                </Col>
+              </Row>
+            </Carousel.Item>
+          ))}
+        </Carousel>
+      </Container>
       <Footer />
-    </Container>
+    </>
   );
 }
 
