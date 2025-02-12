@@ -238,7 +238,8 @@ function Challenge() {
                         placeholder="Enter song name..."
                         onChange={handleTrackChange}
                         value={selectedTrack}
-                        className="border-dark"
+                        className={`border-dark ${styles.placeholderStyle}`}
+                        style={{ backgroundColor: '#CFBCDF' }}
                       />
                     </Form.Group>
 
@@ -249,6 +250,7 @@ function Challenge() {
                         value={selectedArtists}
                         onChange={handleSingerChange}
                         className="border-dark"
+                        style={{ backgroundColor: '#CFBCDF' }}
                       >
                         <option value="" disabled hidden>
                           Select an artist...
@@ -271,10 +273,10 @@ function Challenge() {
                       </Button>
                       <Button
                         variant="info"
-                        className={`w-100 me-2 ${styles.frontButtonColor}`}
+                        className={`w-100 me-2 ${styles.playButtonColor}`}
                         onClick={() => setPlay(!play)}
                       >
-                        Play
+                        ▶
                       </Button>
                       <Button
                         variant="info"
