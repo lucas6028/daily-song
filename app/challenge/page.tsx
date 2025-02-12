@@ -37,6 +37,7 @@ function Challenge() {
   const [relatedArtists, setRelatedArtists] = useState<Artist[]>([]);
   const [isFlipped, setIsFlipped] = useState(false);
   const router = useRouter();
+  const trackIndex = Math.floor(Math.random() * 9);
 
   // SWR
   const fetcher = (url: string) => axios.get(url, { withCredentials: true }).then(res => res.data);
@@ -111,10 +112,10 @@ function Challenge() {
           id: art.mbid,
           uri: art.url,
         }));
-        console.log('artists: ' + artists.map(art => art.name));
-        console.log('new related artists: ' + newRelatedArtists.map(art => art.name));
+        // console.log('artists: ' + artists.map(art => art.name));
+        // console.log('new related artists: ' + newRelatedArtists.map(art => art.name));
         setRelatedArtists(shuffleArray([...artists, ...newRelatedArtists]));
-        console.log('related artists: ' + relatedArtists.map(art => art.name));
+        // console.log('related artists: ' + relatedArtists.map(art => art.name));
       } catch (err) {
         console.error('Error while get related artists: ' + err);
       }
@@ -135,8 +136,8 @@ function Challenge() {
         }
       }
 
-      console.log('answerIndex:' + answerIndex);
-      console.log('answer artist: ' + relatedArtists[answerIndex].name);
+      // console.log('answerIndex:' + answerIndex);
+      // console.log('answer artist: ' + relatedArtists[answerIndex].name);
 
       try {
         const res = await axios.get<SpotifyTracksResponse>('/api/artist/top-tracks', {
@@ -170,16 +171,17 @@ function Challenge() {
 
   useEffect(() => {
     if (tracks.length === 0) return;
-    setUri(tracks[0].trackUri);
+    console.log('tracks length: ' + tracks.length);
+    setUri(tracks[trackIndex].trackUri);
   }, [tracks]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const trimTrackName = trimName(tracks[0].title);
+    const trimTrackName = trimName(tracks[trackIndex].title);
     const trimSelectedTrackName = trimName(selectedTrack);
 
     if (compareNames(trimTrackName, trimSelectedTrackName)) {
-      if (tracks[0].artist === selectedArtists) {
+      if (tracks[trackIndex].artist === selectedArtists) {
         console.log('Flip card!');
         setIsFlipped(true);
       } else {
@@ -292,14 +294,14 @@ function Challenge() {
             <div className={`d-flex justify-content-center mt-4 ${styles.cardBack}`}>
               <Card className={`shadow-lg text-light rounded-3 profile-card ${styles.card}`}>
                 <Card.Img
-                  src={tracks[0].img}
+                  src={tracks[trackIndex].img}
                   alt="Track cover"
                   className="rounded-circle mx-auto mt-3 profile-img"
                   style={{ width: '150px', height: '150px', objectFit: 'cover' }}
                 />
                 <Card.Body className="text-center p-4">
-                  <Card.Title>{tracks[0].title}</Card.Title>
-                  <Card.Subtitle className="mb-3">{tracks[0].artist}</Card.Subtitle>
+                  <Card.Title>{tracks[trackIndex].title}</Card.Title>
+                  <Card.Subtitle className="mb-3">{tracks[trackIndex].artist}</Card.Subtitle>
                   <Button
                     variant="info"
                     className={`w-100 ${styles.frontButtonColor}`}
