@@ -141,5 +141,3 @@
   transform: translateY(1px); /* Slight press effect */
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Reduced shadow for pressed button */
 }
-
-
