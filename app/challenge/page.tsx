@@ -171,7 +171,6 @@ function Challenge() {
 
   useEffect(() => {
     if (tracks.length === 0) return;
-    console.log('tracks length: ' + tracks.length);
     setUri(tracks[trackIndex].trackUri);
   }, [tracks]);
 
