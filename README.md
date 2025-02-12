@@ -33,6 +33,7 @@ Display top tracks, recommend tracks, and daily challenge. Listen to music we re
 - **Vercel** (架設網站 PaSS)
 - **Spotify Web API** (API)
 - **KKBOX OpenAPI** (API)
+- **LastFM API** (API)
 - **OAuth 2.0** (Spotify Login)
 - Axios (API串接、前後端溝通)
 - Bootstrap (CSS Styling)
@@ -80,6 +81,7 @@ Display top tracks, recommend tracks, and daily challenge. Listen to music we re
    NEXT_PUBLIC_API_URL=https://localhost:3000/
    NEXT_PUBLIC_KKBOX_CLIENT_ID=YOUR_KKBOX_CLIENT_ID
    SECRET_KKBOX_CLIENT_SECRET=YOUR_KKBOX_SECRET
+   SECRET_LASTFM_API_KEY=05dfac372dde551ea917303b11153895
    ```
 
    Spotify client id 和 secret 可在 Spofity Developer 網站註冊
@@ -87,6 +89,9 @@ Display top tracks, recommend tracks, and daily challenge. Listen to music we re
 
    KKBOX client id 和 secret 可在 KKBOX OpenAPI 網站註冊
    Website: [KKBOX OpenAPI](https://docs-zhtw.kkbox.codes/#overview--%E9%96%8B%E5%A7%8B%E4%BD%BF%E7%94%A8)
+
+   LastFM 的 API 可在 LastFM 官網註冊
+   Website: [LastFM API Docs](https://www.last.fm/api#getting-started)
 
 4. 啟動開發伺服器：
 
@@ -107,6 +112,8 @@ Display top tracks, recommend tracks, and daily challenge. Listen to music we re
 過了幾個月，發現 Spofity 把 recommend tracks 和 recommend artist 的 API 禁用了，所以變成原本的 recommend tracks 和 challenge 無法使用，必須找到替代方案。一開始我嘗試使用 Gemini LLM 推薦歌曲，但是回傳的 Spofity ID 或 YouTube embed ID 並不正確，且回傳時間較久。另外我也有常識使用 OpenAI 的 GPT-4o 與 GPT-4o mini 模型，他提供的 YouTube embed ID 一半是正確的，導致呈現歌曲時成果會參差不齊。後來我搜尋了有無其他推薦歌曲的 public API，發現 Last.FM 有推薦的歌曲與歌手 API，但沒有提供歌曲的 audio ，也沒有專輯的圖片。
 
 經過一番搜尋後，發現 KKBOX 有提供 recommend tracks 的 OpenAPI，只需要提供歌曲的 ID，還可以指定區域、數量、和 offset。回傳的結果有照片、歌曲的資訊、歌手的資訊，算是因有盡有。但可能因為版權的關係，沒有提供 audio，所以播放按鈕就變成 redirect 到 KKBOX 的網站。目前的問題是如何得到歌曲的 ID，所以 base ID 先以周杰倫的安靜代替。
+
+因為 Spotify related artist 的 API 也 deprecated，所以接下來也更改了 challenge 的 related artist，使用 LastFM 的 API，可以用歌手名字搜尋相關的歌手，而沒有選擇 KKBOX 是因為 get related artist 必須提供 KKBOX singer 的 ID，較不方便。但使用 LastFM 的 API 缺點是有些歌手或團體沒有資料，但機率不高，所以還是不錯用。
 
 總結來說我在這個 Side Project 中學到許多知識與技巧，包括如何架設網站、如何使用 OAuth、React 的基本功能，API 的串接，server 的運作方式 ......
 
